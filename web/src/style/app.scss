@@ -199,4 +199,41 @@ body {
       font-size: 16px !important;
     }
   }
+
+  .profile-box {
+    background-color: $bg;
+    border: 1px solid $bg;
+    padding: 20px;
+    border-radius: 10px;
+
+    .ivu-avatar-large {
+      width: 92px;
+      height: 92px;
+      line-height: 92px;
+      border-radius: 50%;
+    }
+
+    .nick {
+      color: $fontTitle;
+      font-size: 18px;
+    }
+  }
+
+  .footer-bottom {
+    background-color: $bg;
+    padding: 20px;
+    color: $fontTitle;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+
+    .ivu-icon {
+      float: right;
+      color: $fontTitle !important;
+    }
+  }
+  .footer-bottom:hover {
+    background-color: #151215;
+  }
 }
