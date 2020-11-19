@@ -8617,6 +8617,13 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-puzzle-vcode@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/vue-puzzle-vcode/-/vue-puzzle-vcode-1.1.4.tgz#64a67552857480afa74b6372b40c72afccbb6ddf"
+  integrity sha512-AcUywdDtDmVPhk4D4XwmdxKR9yxKl/gy4RFNFZ7jgK7sKx7GFDACaFs6J2jzuIJ0iR/GE6sgndX4odPAt5L+jw==
+  dependencies:
+    vue "^2.6.12"
+
 vue-router@^3.0.1:
   version "3.4.9"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.9.tgz#c016f42030ae2932f14e4748b39a1d9a0e250e66"
@@ -8643,7 +8650,7 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@^2.5.2:
+vue@^2.5.2, vue@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
