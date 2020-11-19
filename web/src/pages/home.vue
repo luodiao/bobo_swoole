@@ -1,6 +1,9 @@
 <template>
   <Row class="home">
     <Row class="left-col">
+      <div class="bar-icon logo">
+        Bo
+      </div>
       <div class="bar-icon" :class="{'active':actvieMenu == 'message'}">
         <Icon type="ios-chatbubbles" @click="swtichMenu('message')" />
       </div>
@@ -16,28 +19,12 @@
     </Row>
 
     <Row class="center-col">
-      2
+      <component :is="loadViewComponent"></component>
     </Row>
 
     <Row class="right-col">
       3
     </Row>
-
-    <!-- <Col :xs="0" :lg="2" class="left-col">
-      <div class="bar-icon" :class="{'active':actvieMenu == 'message'}">
-        <Icon type="ios-chatbubbles" size="25" @click="swtichMenu('message')" />
-      </div>
-      <div class="bar-icon" :class="{'active':actvieMenu == 'address'}">
-        <Icon type="md-list-box" size="25" @click="swtichMenu('address')" />
-      </div>
-      <div class="bar-icon" :class="{'active':actvieMenu == 'profile'}">
-        <Icon type="md-person" size="25" @click="swtichMenu('profile')" />
-      </div>
-    </Col>
-
-    <Col :lg="8" class="center-col">2</Col>
-
-    <Col>3</Col> -->
   </Row>
 </template>
 
@@ -45,13 +32,37 @@
 export default {
   data () {
     return {
-      actvieMenu: 'message' // message=消息 address=通讯录 profile=个人
+      actvieMenu: 'message', // message=消息 address=通讯录 profile=个人
+      loadViewComponent: 'message-view' // 当前加载组件
     }
+  },
+
+  computed: {
+    activeMenuData: {
+      get () {
+        return this.actvieMenu
+      },
+      set (value) {
+        this.actvieMenu = value
+        this.loadViewComponent = value + '-view'
+      }
+    }
+  },
+
+  components: {
+    /** 信息列表组件 */
+    'message-view': require('../components/MessageView').default,
+
+    /** 信息列表组件 */
+    'address-view': require('../components/AddressView').default,
+
+    /** 信息列表组件 */
+    'profile-view': require('../components/ProfileView').default
   },
 
   methods: {
     swtichMenu (menu) {
-      this.actvieMenu = menu
+      this.activeMenuData = menu
     }
   }
 }

@@ -36,6 +36,19 @@ body {
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
 }
 
+.ivu-input-wrapper-large .ivu-input-prefix i, .ivu-input-wrapper-large .ivu-input-suffix i {
+  line-height: 48px;
+}
+
+.font-title {
+  font-weight: 800;
+  color: $fontTitle;
+  margin-bottom: 0.25rem;
+}
+.mb-6 {
+  margin-bottom: 1.25rem!important;
+}
+
 /**
  * login and register
  */
@@ -44,10 +57,7 @@ body {
   margin: 15% auto 0;
 
   .font-title {
-    font-weight: 700;
     text-align: center;
-    color: $fontTitle;
-    margin-bottom: 0.25rem;
   }
 
   p {
@@ -76,6 +86,14 @@ body {
   .left-col {
     width: 70px;
 
+    .logo {
+      font-size: 2rem;
+      margin: 0 0 150px 0 !important;
+      font-weight: 800;
+      font-family: cursive;
+      color: #2b85e4;
+    }
+
     .bar-icon {
       text-align: center;
       margin: 3rem 0;
@@ -97,6 +115,13 @@ body {
     height: 100vh;
     width: 420px;
     background-color: $subBg;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+  }
+  .center-col::-webkit-scrollbar {
+    width: 0;
   }
 
   .right-col {
@@ -107,11 +132,15 @@ body {
   @media screen and (max-width: 567px) {
     .left-col {
       background-color: $bg !important;
-      position: absolute;
+      position: fixed;
       bottom: 0;
       z-index: 1;
       height: 61px;
       width: 100%;
+
+      .logo {
+        display: none;
+      }
 
       .bar-icon {
         float: left;
@@ -126,10 +155,48 @@ body {
 
     .center-col {
       width: 100%;
+      padding-bottom: 61px;
+    }
+    .center-col::-webkit-scrollbar {
+      width: none !important;
     }
 
     .right-col {
       display: none;
+    }
+  }
+}
+
+/**
+ * component
+ */
+.component {
+
+  .list-item {
+    background-color: $bg;
+    border-radius: .375rem;
+    padding: 20px;
+    border-bottom: none !important;
+
+    .nick {
+      color: $fontTitle;
+      font-weight: 600;
+      font-size: 0.9rem;
+      position: relative;
+  
+      small {
+        color: $fontColor;
+        position: absolute;
+        right: 0;
+      }
+    }
+  
+    .description {
+      color: $fontColor;
+    }
+
+    .ivu-avatar {
+      font-size: 16px !important;
     }
   }
 }
