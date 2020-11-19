@@ -22,8 +22,8 @@
       <component :is="loadViewComponent"></component>
     </Row>
 
-    <Row class="right-col">
-      3
+    <Row class="right-col right-col-active">
+      <component :is="loadSettingComponent"></component>
     </Row>
   </Row>
 </template>
@@ -33,7 +33,8 @@ export default {
   data () {
     return {
       actvieMenu: 'message', // message=消息 address=通讯录 profile=个人
-      loadViewComponent: 'message-view' // 当前加载组件
+      loadViewComponent: 'message-view', // 当前左侧加载组件
+      loadSettingComponent: 'message-setting' // 当前右侧加载组件
     }
   },
 
@@ -57,7 +58,10 @@ export default {
     'address-view': require('../components/AddressView').default,
 
     /** 信息列表组件 */
-    'profile-view': require('../components/ProfileView').default
+    'profile-view': require('../components/ProfileView').default,
+
+    /** 对话窗口组件 */
+    'message-setting': require('../components/MessageSetting').default
   },
 
   methods: {
