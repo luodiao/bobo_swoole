@@ -6,3 +6,5 @@ service_api/runtime/
 service_api/vendor/*
 service_api/.env
 service_api/runtime/*
+.idea/*
+service_api/composer.lock
