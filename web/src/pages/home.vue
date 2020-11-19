@@ -4,17 +4,17 @@
       <div class="bar-icon logo">
         Bo
       </div>
-      <div class="bar-icon" :class="{'active':actvieMenu == 'message'}">
-        <Icon type="ios-chatbubbles" @click="swtichMenu('message')" />
+      <div class="bar-icon" :class="{'active':actvieMenu == 'message'}"  @click="swtichMenu('message')">
+        <Icon type="ios-chatbubbles" />
       </div>
-      <div class="bar-icon" :class="{'active':actvieMenu == 'address'}">
-        <Icon type="md-list-box" @click="swtichMenu('address')" />
+      <div class="bar-icon" :class="{'active':actvieMenu == 'address'}" @click="swtichMenu('address')">
+        <Icon type="md-list-box" />
       </div>
-      <div class="bar-icon" :class="{'active':actvieMenu == 'profile'}">
-        <Icon type="md-person" @click="swtichMenu('profile')" />
+      <div class="bar-icon" :class="{'active':actvieMenu == 'profile'}"  @click="swtichMenu('profile')">
+        <Icon type="md-person" />
       </div>
-      <div class="bar-icon" :class="{'active':actvieMenu == 'setting'}">
-        <Icon type="md-settings" @click="swtichMenu('setting')" />
+      <div class="bar-icon" :class="{'active':actvieMenu == 'setting'}" @click="swtichMenu('setting')">
+        <Icon type="md-settings" />
       </div>
     </Row>
 
