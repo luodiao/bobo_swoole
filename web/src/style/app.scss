@@ -1,0 +1,135 @@
+$bg: #29242A;
+$subBg: #2F2A30;
+$fontColor: #a7a7a7;
+$fontTitle: #ffffff;
+$primary: #2d8cf0;
+
+
+body {
+  margin: 0;
+  font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: $fontColor;
+  text-align: left;
+  background-color: $bg;
+}
+
+.text-input input {
+  border: none;
+  display: block;
+  width: 100%;
+  height: calc(1.6em + 1.375rem + 2px);
+  padding: .6875rem 1.0625rem;
+  font-size: .9375rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #a7a7a7;
+  background-color: #2d3238;
+  background-clip: padding-box;
+  border: 1px solid #2d3238;
+  border-radius: .375rem;
+  -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+
+/**
+ * login and register
+ */
+.login-card {
+  max-width: 23rem;
+  margin: 15% auto 0;
+
+  .font-title {
+    font-weight: 700;
+    text-align: center;
+    color: $fontTitle;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  input {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/**
+ * home
+ */
+ 
+.home {
+  height: 100vh;
+
+  .left-col, .center-col, .right-col {
+    float: left;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .left-col {
+    width: 70px;
+
+    .bar-icon {
+      text-align: center;
+      margin: 3rem 0;
+      cursor: pointer;
+
+      i {
+        font-size: 1.5rem;
+      }
+    }
+    .bar-icon:hover {
+      color: $primary;
+    }
+    .active {
+      color: $primary;
+    }
+  }
+
+  .center-col {
+    height: 100vh;
+    width: 420px;
+    background-color: $subBg;
+  }
+
+  .right-col {
+    width: calc(100% - 70px - 420px);
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 567px) {
+    .left-col {
+      background-color: $bg !important;
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+      height: 61px;
+      width: 100%;
+
+      .bar-icon {
+        float: left;
+        width: 25%;
+        margin: 0;
+
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .center-col {
+      width: 100%;
+    }
+
+    .right-col {
+      display: none;
+    }
+  }
+}
