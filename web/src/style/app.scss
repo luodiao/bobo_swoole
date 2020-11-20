@@ -1,8 +1,19 @@
-$bg: #29242A;
-$subBg: #2F2A30;
-$fontColor: #a7a7a7;
-$fontTitle: #ffffff;
-$primary: #2d8cf0;
+@import './themes';
+
+// 遍历主题map
+@mixin themeify {
+  @each $theme-name, $theme-map in $themes {
+    $theme-map: $theme-map !global;
+    [data-theme="#{$theme-name}"] & {
+        @content;
+    }
+  }
+}
+
+// 获取key
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
 
 body {
   margin: 0;
@@ -10,9 +21,11 @@ body {
   font-size: .9375rem;
   font-weight: 400;
   line-height: 1.6;
-  color: $fontColor;
   text-align: left;
-  background-color: $bg;
+  @include themeify {
+    background-color: themed("background_default");
+    color: themed('font_color_default');
+  }
 }
 
 .text-input input {
@@ -24,15 +37,18 @@ body {
   font-size: .9375rem;
   font-weight: 400;
   line-height: 1.6;
-  color: #a7a7a7;
-  background-color: #2d3238;
   background-clip: padding-box;
-  border: 1px solid #2d3238;
   border-radius: .375rem;
   -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
   transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+
+  @include themeify {
+    color: themed('font_color_default');
+    background-color: themed('input_background');
+    border: 1px solid themed('input_background');
+  }
 }
 
 .ivu-input:focus, input:focus, textarea:focus {
@@ -47,8 +63,11 @@ body {
 
 .font-title {
   font-weight: 800;
-  color: $fontTitle;
   margin-bottom: 0.25rem;
+
+  @include themeify {
+    color: themed('font_color_title');
+  }
 }
 
 .mb-6 {
@@ -97,7 +116,9 @@ body {
       margin: 0 0 150px 0 !important;
       font-weight: 800;
       font-family: cursive;
-      color: #2b85e4;
+      @include themeify {
+        color: themed('primary');
+      }
     }
 
     .bar-icon {
@@ -110,22 +131,29 @@ body {
       }
     }
     .bar-icon:hover {
-      color: $primary;
+      @include themeify {
+        color: themed('primary');
+      }
     }
     .active {
-      color: $primary;
+      @include themeify {
+        color: themed('primary');
+      }
     }
   }
 
   .center-col {
     height: 100vh;
     width: 420px;
-    background-color: $subBg;
     overflow-x: hidden;
     overflow-y: scroll;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    @include themeify {
+      background-color: themed('background_secondary');
+    }
   }
+
   .center-col::-webkit-scrollbar {
     width: 0;
   }
@@ -137,12 +165,14 @@ body {
 
   @media screen and (max-width: 567px) {
     .left-col {
-      background-color: $bg !important;
       position: fixed;
       bottom: 0;
       z-index: 1;
       height: 61px;
       width: 100%;
+      @include themeify {
+        background-color: themed('background_default') !important;
+      }
 
       .logo {
         display: none;
@@ -172,9 +202,11 @@ body {
       z-index: -1;
     }
     .right-col-active {
-      background-color: $bg;
       z-index: 100 !important;
       width: 100%;
+      @include themeify {
+        background-color: themed('background_default') !important;
+      }
     }
   }
 }
@@ -185,26 +217,37 @@ body {
 .component {
 
   .list-item {
-    background-color: $bg;
     border-radius: .375rem;
     padding: 20px;
     border-bottom: none !important;
+    @include themeify {
+      background-color: themed('background_default');
+    }
 
     .nick {
-      color: $fontTitle;
+      @include themeify {
+        color: themed('font_color_title');
+      }
       font-weight: 600;
       font-size: 0.9rem;
       position: relative;
+      @include themeify {
+        color: themed('font_color_title');
+      }
   
       small {
-        color: $fontColor;
         position: absolute;
         right: 0;
+        @include themeify {
+          color: themed('font_color_default');
+        }
       }
     }
   
     .description {
-      color: $fontColor;
+      @include themeify {
+        color: themed('font_color_default');
+      }
     }
 
     .ivu-avatar {
@@ -213,10 +256,12 @@ body {
   }
 
   .profile-box {
-    background-color: $bg;
-    border: 1px solid $bg;
     padding: 20px;
     border-radius: 10px;
+    @include themeify {
+      background-color: themed('background_default');
+      border: 1px solid themed('background_default');
+    }
 
     .ivu-avatar-large {
       width: 92px;
@@ -226,27 +271,35 @@ body {
     }
 
     .nick {
-      color: $fontTitle;
       font-size: 18px;
+      @include themeify {
+        color: themed('font_color_title');
+      }
     }
   }
 
   .footer-bottom {
-    background-color: $bg;
     padding: 20px;
-    color: $fontTitle;
     font-size: 18px;
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
+    @include themeify {
+      background-color: themed('background_default');
+      color: themed('font_color_title');
+    }
 
     .ivu-icon {
       float: right;
-      color: $fontTitle !important;
+      @include themeify {
+        color: themed('font_color_title') !important;
+      }
     }
   }
   .footer-bottom:hover {
-    background-color: #151215;
+    @include themeify {
+      background-color: themed('input_background');
+    }
   }
 }
 
@@ -257,7 +310,9 @@ body {
 
   .header {
     height: 72px;
-    border-bottom: 1px solid $subBg;
+    @include themeify {
+      border-bottom: 1px solid themed('background_secondary');
+    }
 
     .back {
       display: none;
@@ -268,22 +323,27 @@ body {
     }
 
     .nick {
-      color: $fontTitle;
       font-weight: 600;
       font-size: 0.9rem;
       position: relative;
+      @include themeify {
+        color: themed('font_color_title');
+      }
     }
   
-    .description {
-      color: $fontColor;
+    .description, .search-icon {
+      @include themeify {
+        color: themed('font_color_default');
+      }
     }
 
     .search-icon {
       font-size: 20px;
-      color: $fontColor;
     }
     .search-icon:hover {
-      color: $fontTitle;
+      @include themeify {
+        color: themed('font_color_title');
+      }
     }
   }
 
@@ -294,7 +354,9 @@ body {
   .footer {
     height: 72px;
     line-height: 72px;
-    border-top: 1px solid $subBg;
+    @include themeify {
+      border-top: 1px solid themed('background_secondary');
+    }
 
     .textarea-box, .send-box {
       float: left;
@@ -310,8 +372,10 @@ body {
       width: calc(100% - 60px);
 
       .ivu-input-group {
-        background-color: #2D3238;
         border-radius: 5px;
+        @include themeify {
+          background-color: themed('input_background');
+        }
       }
 
       textarea, input, .ivu-input-group-append {

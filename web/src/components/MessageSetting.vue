@@ -31,8 +31,8 @@
     <div class="footer">
       <div class="textarea-box">
         <Input size="large" placeholder="Enter something...">
-          <span slot="append"><Icon type="md-happy" size="25" /></span>
-          <span slot="append"><Icon type="ios-camera" size="25" /></span>
+          <span slot="append"><Icon type="md-happy" size="25"></Icon></span>
+          <span slot="append"><Icon type="ios-camera" size="25"></Icon></span>
         </Input>
       </div>
       <div class="send-box">
