@@ -74,6 +74,33 @@ body {
   margin-bottom: 1.25rem!important;
 }
 
+.button-group {
+  height: 57px;
+  border-radius: 5px;
+  padding: 0 5px;
+
+  @include themeify {
+    background-color: themed('input_background');
+  }
+
+  .button {
+    height: 47px;
+    margin-top: 5px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 47px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .active {
+    @include themeify {
+      background-color: themed('background_default');
+    }
+  }
+}
+
 /**
  * login and register
  */
