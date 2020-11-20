@@ -247,6 +247,7 @@ body {
     border-radius: .375rem;
     padding: 20px;
     border-bottom: none !important;
+    cursor: pointer;
     @include themeify {
       background-color: themed('background_default');
     }

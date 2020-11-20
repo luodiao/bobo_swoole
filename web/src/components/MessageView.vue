@@ -3,7 +3,7 @@
     <h2 class="font-title mb-6">Chats</h2>
     <Input size="large" class="text-input mb-6" placeholder="Search for messages or users..." suffix="ios-search" />
     <List>
-      <ListItem class="list-item mb-6" v-for="(item,inx) in setting.items" :key="inx">
+      <ListItem class="list-item mb-6" v-for="(item,inx) in options.items" :key="inx" @click.native="changeUser(item)">
         <ListItemMeta>
           <template slot="avatar">
             <Badge :dot="item.dot">
@@ -30,16 +30,14 @@ export default {
   name: 'message-view',
 
   props: {
-    value: Object
+    value: Object,
+    options: Object
   },
 
-  data () {
-    return {
-      setting: this.value
+  methods: {
+    changeUser (user) {
+      this.$emit('input', user)
     }
-  },
-
-  created () {
   }
 }
 </script>
