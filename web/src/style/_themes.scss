@@ -1,0 +1,18 @@
+$themes: (
+  light: (
+    background_default: #FFFFFF,
+    background_secondary: #F5F6FA,
+    font_color_default: #7f808c,
+    font_color_title: #242939,
+    primary: #000000,
+    input_background: #EDEEF6,
+  ),
+  dark: (
+    background_default: #29242A,
+    background_secondary: #2F2A30,
+    font_color_default: #a7a7a7,
+    font_color_title: #ffffff,
+    primary: #2d8cf0,
+    input_background: #2d3238,
+  )
+);

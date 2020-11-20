@@ -19,6 +19,11 @@
     </Row>
 
     <Row class="center-col">
+      <ButtonGroup>
+        <Button @click.native="themes('light')">light</Button>
+        <Button @click.native="themes('dark')">dark</Button>
+      </ButtonGroup>
+
       <component :is="loadViewComponent"></component>
     </Row>
 
@@ -54,11 +59,14 @@ export default {
     /** 信息列表组件 */
     'message-view': require('../components/MessageView').default,
 
-    /** 信息列表组件 */
+    /** 通讯录组件 */
     'address-view': require('../components/AddressView').default,
 
-    /** 信息列表组件 */
+    /** 个人信息组件 */
     'profile-view': require('../components/ProfileView').default,
+
+    /** 个人设置组件 */
+    'setting-view': require('../components/SettingView').default,
 
     /** 对话窗口组件 */
     'message-setting': require('../components/MessageSetting').default
@@ -67,11 +75,15 @@ export default {
   methods: {
     swtichMenu (menu) {
       this.activeMenuData = menu
+    },
+    themes (theme) {
+      alert(theme)
+      window.document.documentElement.setAttribute('data-theme', theme)
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../style/app.scss';
+// @import '../style/app.scss';
 </style>

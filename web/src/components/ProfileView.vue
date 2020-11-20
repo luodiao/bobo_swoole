@@ -11,7 +11,7 @@
 
     <div class="footer-bottom">
       Logout
-      <Icon type="md-log-out"></Icon>
+      <Icon type="md-log-out" size="25"></Icon>
     </div>
   </Row>
 </template>
