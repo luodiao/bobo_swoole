@@ -1,6 +1,6 @@
 <template>
   <Row class="setting">
-    <h2 class="font-title mb-6">Profile</h2>
+    <h2 class="font-title mb-6">Setting</h2>
     <div>Themes</div>
     <Row class="button-group mb-6">
       <Col :span="8" class="button" :class="{'active':theme=='light'}" @click.native="switchThemes('light')">Light</Col>
@@ -17,7 +17,7 @@ export default {
 
   data () {
     return {
-      theme: 'light'
+      theme: ''
     }
   },
 
@@ -26,6 +26,10 @@ export default {
       this.theme = theme
       window.document.documentElement.setAttribute('data-theme', theme)
     }
+  },
+
+  created () {
+    this.theme = window.document.documentElement.getAttribute('data-theme')
   }
 }
 </script>

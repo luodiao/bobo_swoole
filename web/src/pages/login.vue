@@ -1,12 +1,12 @@
 <template>
   <Row class="login-card">
-    <h1 class="font-title">Sign in</h1>
-    <p>Welcome to the official Chat web-client.</p>
-    <Input v-model="init.username" size="large" class="text-input" placeholder="Enter your email" />
-    <Input v-model="init.password" size="large" class="text-input" placeholder="Enter your password" />
-    <Button size="large" type="primary" :loading="loading" long @click="showValideCodePanel">Sign in</Button>
+    <h1 class="font-title">{{$t('Sign in')}}</h1>
+    <p>{{$t('Welcome to the Bobo Chat web-client.')}}</p>
+    <Input v-model="init.username" size="large" class="text-input" :placeholder="$t('Enter your username')" />
+    <Input v-model="init.password" size="large" class="text-input" :placeholder="$t('Enter your password')" />
+    <Button size="large" type="primary" :loading="loading" long @click="showValideCodePanel">{{$t('Sign in')}}</Button>
     <p></p>
-    <p>Don't have an account yet <router-link to="/register">Sign up</router-link>.</p>
+    <p>{{$t("Don't have an account yet")}} <router-link to="/register">{{$t('Sign up')}}</router-link></p>
     <Vcode :show="validCodeIsShow" @success="success" @close="close" />
   </Row>
 </template>
