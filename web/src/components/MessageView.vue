@@ -1,7 +1,7 @@
 <template>
   <Row class="component">
-    <h2 class="font-title mb-6">Chats</h2>
-    <Input size="large" class="text-input mb-6" placeholder="Search for messages or users..." suffix="ios-search" />
+    <h2 class="font-title mb-6">{{$t('Chats')}}</h2>
+    <Input size="large" class="text-input mb-6" :placeholder="$t('Search for messages or users...')" suffix="ios-search" />
     <List>
       <ListItem class="list-item mb-6" v-for="(item,inx) in options.items" :key="inx" @click.native="changeUser(item)">
         <ListItemMeta>

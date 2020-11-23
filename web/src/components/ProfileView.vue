@@ -1,6 +1,6 @@
 <template>
   <Row class="component">
-    <h2 class="font-title mb-6">Profile</h2>
+    <h2 class="font-title mb-6">{{$t('Profile')}}</h2>
     <Card class="profile-box mb-6">
       <div style="text-align:center">
         <Avatar icon="ios-person" size="large" class="mb-6"></Avatar>
@@ -10,7 +10,7 @@
     </Card>
 
     <div class="footer-bottom">
-      Logout
+      {{$t('Logout')}}
       <Icon type="md-log-out" size="25"></Icon>
     </div>
   </Row>

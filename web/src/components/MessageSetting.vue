@@ -17,7 +17,7 @@
                 </h6>
               </template>
               <template slot="description">
-                <p class="description"><Badge :status="value.online ? 'success' : 'default'"></Badge>Online</p>
+                <p class="description"><Badge :status="value.online ? 'success' : 'default'"></Badge>{{$t('Online')}}</p>
               </template>
             </ListItemMeta>
             <template slot="action">
@@ -33,7 +33,7 @@
 
       <div class="footer">
         <div class="textarea-box">
-          <Input size="large" placeholder="Enter something...">
+          <Input size="large" :placeholder="$t('Enter something...')">
             <span slot="append"><Icon type="md-happy" size="25"></Icon></span>
             <span slot="append"><Icon type="ios-camera" size="25"></Icon></span>
           </Input>

@@ -13,7 +13,7 @@ Vue.use(ViewUI)
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: 'zh',
   messages: {
     'zh': require('./language/zh'),
     'en': require('./language/en')
