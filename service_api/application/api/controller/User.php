@@ -149,6 +149,7 @@ class User extends Api
      * @param string $username 用户名
      * @param string $nickname 昵称
      * @param string $bio      个人简介
+     * @param string $gender   性别 0=保密 1=男 2=女
      */
     public function profile()
     {
@@ -173,6 +174,7 @@ class User extends Api
         }
         $user->bio = $bio;
         $user->avatar = $avatar;
+        $user->gender = $gender;
         $user->save();
         $this->success();
     }
