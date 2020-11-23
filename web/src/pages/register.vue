@@ -70,12 +70,17 @@ export default {
       this.signUp(this.model).then(res => {
         return res.body
       }).then(res => {
-        console.log(res)
         if (res.code === 0) {
           this.$Message.error(res.msg)
+          this.loading = false
+          return false
         }
-        
-        this.loading = false
+
+        this.$Message.success(res.msg)
+        setTimeout(() => {
+          this.loading = false
+          this.$router.push('/login')
+        }, 1000)
       })
     }
   }
