@@ -156,26 +156,37 @@ class User extends Api
         $user = $this->auth->getUser();
         $username = $this->request->request('username');
         $nickname = $this->request->request('nickname');
-        $bio = $this->request->request('bio');
-        $avatar = $this->request->request('avatar', '', 'trim,strip_tags,htmlspecialchars');
+        $bio      = $this->request->request('bio');
+        $gender   = $this->request->request('gender');
+        $avatar   = $this->request->request('avatar', '', 'trim,strip_tags,htmlspecialchars');
+
         if ($username) {
-            $exists = \app\common\model\User::where('username', $username)->where('id', '<>', $this->auth->id)->find();
+            $exists = \app\common\model\User::where('username', $username)
+                ->where('id', '<>', $this->auth->id)
+                ->find();
+
             if ($exists) {
                 $this->error(__('Username already exists'));
             }
+
             $user->username = $username;
         }
         if ($nickname) {
-            $exists = \app\common\model\User::where('nickname', $nickname)->where('id', '<>', $this->auth->id)->find();
+            $exists = \app\common\model\User::where('nickname', $nickname)
+                ->where('id', '<>', $this->auth->id)
+                ->find();
+
             if ($exists) {
                 $this->error(__('Nickname already exists'));
             }
+
             $user->nickname = $nickname;
         }
         $user->bio = $bio;
         $user->avatar = $avatar;
         $user->gender = $gender;
         $user->save();
+        
         $this->success();
     }
 
