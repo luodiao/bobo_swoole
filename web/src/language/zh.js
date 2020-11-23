@@ -24,5 +24,12 @@ module.exports = {
   'Enter something...': '输入点什么...',
   'Language': '语言',
   'Chinese': '中文',
-  'English': '英文'
+  'English': '英文',
+
+  /** 注册 */
+  'The username cannot be empty': '用户名不能为空',
+  'The password cannot be empty': '密码不能为空',
+  'The confirm password cannot be empty': '确认密码不能为空',
+  'The two passwords do not match': '两次密码不一致',
+  'The length is between {0} and {1} characters': '长度在{0}到{1}个字符之间'
 }

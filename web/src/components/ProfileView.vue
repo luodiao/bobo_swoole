@@ -8,8 +8,6 @@
         <p>Bootstrap is an open source toolkit for developing web with HTML.</p>
       </div>
     </Card>
-
-    
   </Row>
 </template>
 
