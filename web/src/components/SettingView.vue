@@ -8,6 +8,11 @@
       <Col :span="8" class="button" :class="{'active':theme=='vip'}" @click.native="switchThemes('vip')">{{$t('VIP')}}</Col>
     </Row>
 
+    <div>{{$t('Language')}}</div>
+    <Row class="button-group mb-6">
+      <Col :span="12" class="button" :class="{'active':language=='zh'}" @click.native="switchLanguage('zh')">{{$t('Chinese')}}</Col>
+      <Col :span="12" class="button" :class="{'active':language=='en'}" @click.native="switchLanguage('en')">{{$t('English')}}</Col>
+    </Row>
   </Row>
 </template>
 
@@ -17,7 +22,8 @@ export default {
 
   data () {
     return {
-      theme: ''
+      theme: '',
+      language: 'en'
     }
   },
 
@@ -25,6 +31,10 @@ export default {
     switchThemes (theme) {
       this.theme = theme
       window.document.documentElement.setAttribute('data-theme', theme)
+    },
+    switchLanguage (language) {
+      this.language = language
+      this.$i18n.locale = language
     }
   },
 

@@ -21,5 +21,8 @@ module.exports = {
   'Themes': '主题',
   'Logout': '登出',
   'Online': '在线',
-  'Enter something...': '输入点什么...'
+  'Enter something...': '输入点什么...',
+  'Language': '语言',
+  'Chinese': '中文',
+  'English': '英文'
 }

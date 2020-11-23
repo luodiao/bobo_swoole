@@ -17,5 +17,12 @@ module.exports = {
   'Search for messages or users...': 'Search for messages or users...',
   'Light': 'Light',
   'Dark': 'Dark',
-  'VIP': 'VIP'
+  'VIP': 'VIP',
+  'Themes': 'Themes',
+  'Logout': 'Logout',
+  'Online': 'Online',
+  'Enter something...': 'Enter something...',
+  'Language': 'Language',
+  'Chinese': 'Chinese',
+  'English': 'English'
 }
