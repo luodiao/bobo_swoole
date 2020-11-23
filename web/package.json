@@ -13,6 +13,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "js-cookie": "^2.2.1",
+    "moment": "^2.29.1",
     "node-sass": "4.14.1",
     "sass-loader": "7.3.1",
     "sass-resources-loader": "^2.1.1",
@@ -20,7 +22,9 @@
     "vue": "^2.5.2",
     "vue-i18n": "^8.22.2",
     "vue-puzzle-vcode": "^1.1.4",
-    "vue-router": "^3.0.1"
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.1",
+    "vuex": "3.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

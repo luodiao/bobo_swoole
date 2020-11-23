@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       theme: '',
-      language: 'en'
+      language: ''
     }
   },
 
@@ -40,6 +40,7 @@ export default {
 
   created () {
     this.theme = window.document.documentElement.getAttribute('data-theme')
+    this.language = this.$i18n.locale
   }
 }
 </script>

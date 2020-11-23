@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -133,6 +135,9 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      user: state => state.sign.user
+    }),
     activeMenuData: {
       get () {
         return this.actvieMenu
@@ -176,6 +181,10 @@ export default {
     swtichMenu (menu) {
       this.activeMenuData = menu
     }
+  },
+
+  created () {
+    console.log(this.user)
   }
 }
 </script>
