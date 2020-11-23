@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -133,6 +135,9 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      user: state => state.sign.user
+    }),
     activeMenuData: {
       get () {
         return this.actvieMenu

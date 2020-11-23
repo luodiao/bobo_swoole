@@ -58,7 +58,7 @@ body {
 }
 
 .ivu-input-wrapper-large .ivu-input-prefix i, .ivu-input-wrapper-large .ivu-input-suffix i {
-  line-height: 48px;
+  line-height: 48px !important;
 }
 
 .font-title {
@@ -75,7 +75,7 @@ body {
 }
 
 .button-group {
-  height: 57px;
+  height: 57px !important;
   border-radius: 5px;
   padding: 0 5px;
 
@@ -107,6 +107,7 @@ body {
 .login-card {
   max-width: 23rem;
   margin: 15% auto 0;
+  padding: 0 10px;
 
   .font-title {
     text-align: center;
@@ -125,7 +126,6 @@ body {
 /**
  * home
  */
- 
 .home {
   height: 100vh;
 
@@ -305,9 +305,11 @@ body {
       }
     }
   }
+}
 
+.setting {
   .footer-bottom {
-    padding: 20px;
+    padding: 10px;
     font-size: 18px;
     font-weight: 600;
     border-radius: 10px;

@@ -1,7 +1,7 @@
 <template>
   <Row class="component">
-    <h2 class="font-title mb-6">Friends</h2>
-    <Input size="large" class="text-input mb-6" placeholder="Search for messages or users..." suffix="ios-search" />
+    <h2 class="font-title mb-6">{{$t('Friends')}}</h2>
+    <Input size="large" class="text-input mb-6" :placeholder="$t('Search for messages or users...')" suffix="ios-search" />
     <Row>
       <div class="mb-6">A</div>
       <List>
@@ -15,7 +15,6 @@
             <template slot="title">
               <h6 class="nick">
                 Bootstrap Themes
-                <small>16:10 pm</small>
               </h6>
             </template>
             <template slot="description">
@@ -34,7 +33,6 @@
             <template slot="title">
               <h6 class="nick">
                 Bootstrap Themes
-                <small>16:10 pm</small>
               </h6>
             </template>
             <template slot="description">
@@ -58,7 +56,6 @@
             <template slot="title">
               <h6 class="nick">
                 Bootstrap Themes
-                <small>16:10 pm</small>
               </h6>
             </template>
             <template slot="description">
@@ -77,7 +74,6 @@
             <template slot="title">
               <h6 class="nick">
                 Bootstrap Themes
-                <small>16:10 pm</small>
               </h6>
             </template>
             <template slot="description">
@@ -96,7 +92,6 @@
             <template slot="title">
               <h6 class="nick">
                 Bootstrap Themes
-                <small>16:10 pm</small>
               </h6>
             </template>
             <template slot="description">
