@@ -9,15 +9,12 @@
       </div>
     </Card>
 
-    <div class="footer-bottom">
-      {{$t('Logout')}}
-      <Icon type="md-log-out" size="25"></Icon>
-    </div>
+    
   </Row>
 </template>
 
 <script>
 export default {
-
+  name: 'profile-view'
 }
 </script>

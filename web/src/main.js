@@ -9,6 +9,7 @@ import VueI18n from 'vue-i18n'
 import Moment from 'moment'
 import store from './store/index'
 import Cookie from 'js-cookie'
+import API from './api'
 
 Vue.config.productionTip = false
 
@@ -19,8 +20,10 @@ Vue.use(VueI18n)
 
 // 是否登录
 router.beforeEach((to, from, next) => {
-  if (typeof Cookie.get('user') === 'undefined') {
-    window.location = '/login'
+  if (typeof Cookie.get('user') === 'undefined' && to.path !== '/login' && to.path !== '/register') {
+    next({name: 'Login'})
+  } else if (typeof Cookie.get('user') !== 'undefined' && (to.path === '/login' || to.path === '/register')) {
+    next({name: 'Index'})
   } else {
     next()
   }
@@ -28,6 +31,9 @@ router.beforeEach((to, from, next) => {
 
 // 实例登录信息
 store.state.sign.user = Cookie.getJSON('user')
+
+// 设置请求头
+API.setResource(Cookie.getJSON('user'))
 
 // 本地化
 const i18n = new VueI18n({

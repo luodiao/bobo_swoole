@@ -126,7 +126,6 @@ body {
 /**
  * home
  */
- 
 .home {
   height: 100vh;
 
@@ -306,9 +305,11 @@ body {
       }
     }
   }
+}
 
+.setting {
   .footer-bottom {
-    padding: 20px;
+    padding: 10px;
     font-size: 18px;
     font-weight: 600;
     border-radius: 10px;

@@ -22,6 +22,10 @@ export default {
 
     signUp ({commit}, data) {
       return API.signUp(data)
+    },
+
+    logout ({commit}) {
+      return API.logout()
     }
   }
 }

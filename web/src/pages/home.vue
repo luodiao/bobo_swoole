@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   data () {
@@ -181,10 +181,6 @@ export default {
     swtichMenu (menu) {
       this.activeMenuData = menu
     }
-  },
-
-  created () {
-    console.log(this.user)
   }
 }
 </script>

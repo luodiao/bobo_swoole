@@ -14,6 +14,7 @@
 <script>
 import Vcode from 'vue-puzzle-vcode'
 import Cookie from 'js-cookie'
+import API from '../api'
 import { mapActions } from 'vuex'
 
 export default {
@@ -51,6 +52,7 @@ export default {
 
         this.$Message.success(res.msg)
         this.setUser(res.data.userinfo)
+        API.setResource(Cookie.getJSON('user'))
         Cookie.set('user', res.data.userinfo, { expires: 7 })
         setTimeout(() => {
           this.$router.push('/')
