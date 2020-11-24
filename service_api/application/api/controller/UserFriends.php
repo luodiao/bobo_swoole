@@ -11,7 +11,7 @@ use Overtrue\Pinyin\Pinyin;
 /**
  * 用户好友接口
  */
-class UserFriends extends Api
+class Userfriends extends Api
 {
     public function _initialize()
     {
