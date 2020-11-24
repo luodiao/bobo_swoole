@@ -70,7 +70,16 @@ class Userfriends extends Api
      */
     public function remove()
     {
+        $id = $this->request->request('id');
+        if (!$id) {
+            $this->error(__('Invalid parameters'));
+        }
 
+        if (UserFriendsModel::destroy(['user_id' => $this->auth->id, 'friend_id' => $id])) {
+            $this->success('successful');
+        } else {
+            $this->error('failed');
+        }
     }
 
     /**
