@@ -40,10 +40,12 @@ export default {
     switchThemes (theme) {
       this.theme = theme
       window.document.documentElement.setAttribute('data-theme', theme)
+      Cookie.set('data-theme', theme, { expires: 7 })
     },
     switchLanguage (language) {
       this.language = language
       this.$i18n.locale = language
+      Cookie.set('language', language, { expires: 7 })
     },
     logoutAction () {
       this.logout().then(res => {

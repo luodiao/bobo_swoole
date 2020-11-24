@@ -63,7 +63,7 @@ export default {
         Cookie.set('user', res.data.userinfo, { expires: 7 })
         API.setResource(res.data.userinfo)
         setTimeout(() => {
-          this.$router.push('/')
+          window.location = '/'
         }, 1000)
       })
     },

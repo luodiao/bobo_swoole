@@ -35,9 +35,12 @@ store.state.sign.user = Cookie.getJSON('user')
 // 设置请求头
 API.setResource(Cookie.getJSON('user'))
 
+// 设置主题
+window.document.documentElement.setAttribute('data-theme', typeof Cookie.get('data-theme') !== 'undefined' ? Cookie.get('data-theme') : 'light')
+
 // 本地化
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: typeof Cookie.get('language') !== 'undefined' ? Cookie.get('language') : 'en',
   messages: {
     'zh': require('./language/zh'),
     'en': require('./language/en')

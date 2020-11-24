@@ -5,7 +5,7 @@
       <div style="text-align:center">
         <Avatar icon="ios-person" :src="user.avatar" size="large" class="mb-6"></Avatar>
         <h3 class="nick">{{user.nickname}}</h3>
-        <p>{{user.bio ? user.bio : $t('Absolutely empty.')}}</p>
+        <p class="text-decoration pointer" @click="showModal('bio')">{{user.bio ? user.bio : $t('Absolutely empty.')}}</p>
       </div>
     </Card>
 
@@ -29,7 +29,7 @@
           </template>
         </Cell>
 
-        <Cell :title="$t('Gender')" :label="user.gender ? user.gender : $t('Not set.')" @click.native="showModal('gender')">
+        <Cell :title="$t('Gender')" :label="genderText" @click.native="showModal('gender')">
           <template slot="extra">
             <Icon type="ios-transgender" size="18" />
           </template>
@@ -44,6 +44,7 @@
     </Card>
 
     <Modal v-model="modal" :title="$t('Setting')">
+      <Input v-model.trim="currentValue" size="large" class="text-input" :placeholder="$t('Absolutely empty.')" v-if="currentFiled == 'bio'" />
       <DatePicker v-model.trim="currentValue" size="large" style="width: 100%;" class="text-input" type="date" :placeholder="$t('Birthday')" v-if="currentFiled == 'birthday'"></DatePicker>
       <Input v-model.trim="currentValue" type="email" size="large" class="text-input" :placeholder="$t('Email')" v-if="currentFiled == 'email'" />
       <Select v-model.number="currentValue" size="large" class="text-select" style="width:100%;" :placeholder="$t('Gender')" v-if="currentFiled == 'gender'">
@@ -79,7 +80,19 @@ export default {
   computed: {
     ...mapState({
       user: state => state.sign.user
-    })
+    }),
+    genderText () {
+      switch (this.user.gender) {
+        case 0:
+          return this.$t('Unknown')
+        case 1:
+          return this.$t('Male')
+        case 2:
+          return this.$t('Female')
+        default:
+          return this.$t('Not set.')
+      }
+    }
   },
 
   methods: {
@@ -109,22 +122,26 @@ export default {
         this.user.birthday = this.currentValue === '' ? '' : this.moment(this.currentValue).format('YYYY-MM-DD')
       }
 
-      if (this.currentFiled == 'gender') {
+      if (this.currentFiled === 'gender') {
         this.user.gender = this.currentValue
       }
 
+      if (this.currentFiled === 'bio') {
+        this.user.bio = this.currentValue
+      }
+
       this.modalLoading = true
-      // let data = {
-      //   nickname: this.user.nickname,
-      //   bio: this.user.bio,
-      //   gender: this.user.gender,
-      //   email: this.user.email,
-      //   birthday: this.user.birthday
-      // };
-      // if (this.user.avatar.indexOf('data:') == -1) {
-      //   data.avatar = this.user.avatar
-      // }
-      this.setProfile(this.user).then(res => {
+      let data = {
+        nickname: this.user.nickname,
+        bio: this.user.bio,
+        gender: this.user.gender,
+        email: this.user.email,
+        birthday: this.user.birthday
+      }
+      if (this.user.avatar.indexOf('data:') === -1) {
+        data.avatar = this.user.avatar
+      }
+      this.setProfile(data).then(res => {
         return res.body
       }).then(res => {
         this.modalLoading = false
@@ -133,9 +150,9 @@ export default {
           this.$Message.error(res.msg)
           return false
         }
-        
+
         Cookie.set('user', this.user, { expires: 7 })
-        this.$Message.error(this.$t('Setup succeeded'))
+        this.$Message.success(this.$t('Setup succeeded'))
         this.modal = false
       })
     }

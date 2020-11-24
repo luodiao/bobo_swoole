@@ -28,6 +28,16 @@ body {
   }
 }
 
+// 小手
+.pointer {
+  cursor: pointer !important;
+}
+
+// 下划虚线
+.text-decoration {
+  text-decoration: underline dotted !important;
+}
+
 .text-select .ivu-select-selection, .text-select .ivu-select-dropdown {
   @include themeify {
     color: themed('font_color_default');
