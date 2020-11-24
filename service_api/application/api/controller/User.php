@@ -151,16 +151,18 @@ class User extends Api
      * @param string $bio      个人简介
      * @param string $gender   性别 0=保密 1=男 2=女
      * @param string $email    email
+     * @param string $birthday 生日
      */
     public function profile()
     {
         $user = $this->auth->getUser();
-        $username = $this->request->request('username');
-        $nickname = $this->request->request('nickname');
-        $bio      = $this->request->request('bio');
-        $gender   = $this->request->request('gender');
-        $email    = $this->request->request('email');
-        $avatar   = $this->request->request('avatar', '', 'trim,strip_tags,htmlspecialchars');
+        $username = $this->request->param('username');
+        $nickname = $this->request->param('nickname');
+        $bio      = $this->request->param('bio');
+        $gender   = $this->request->param('gender');
+        $email    = $this->request->param('email');
+        $birthday = $this->request->param('birthday');
+        $avatar   = $this->request->param('avatar', '', 'trim,strip_tags,htmlspecialchars');
 
         if ($username) {
             $exists = \app\common\model\User::where('username', $username)
@@ -195,9 +197,10 @@ class User extends Api
 
             $user->email = $email;
         }
-        $user->bio = $bio;
-        $user->avatar = $avatar;
-        $user->gender = $gender;
+        $user->bio      = $bio;
+        $user->avatar   = $avatar;
+        $user->gender   = $gender;
+        $user->birthday = $birthday;
         $user->save();
 
         $this->success();

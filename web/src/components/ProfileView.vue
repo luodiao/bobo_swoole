@@ -109,17 +109,22 @@ export default {
         this.user.birthday = this.currentValue === '' ? '' : this.moment(this.currentValue).format('YYYY-MM-DD')
       }
 
-      this.modalLoading = true
-      let data = {
-        nickname: this.user.nickname,
-        bio: this.user.bio,
-        gender: this.user.gender,
-        email: this.user.email
-      };
-      if (this.user.avatar.indexOf('data:') == -1) {
-        data.avatar = this.user.avatar
+      if (this.currentFiled == 'gender') {
+        this.user.gender = this.currentValue
       }
-      this.setProfile(data).then(res => {
+
+      this.modalLoading = true
+      // let data = {
+      //   nickname: this.user.nickname,
+      //   bio: this.user.bio,
+      //   gender: this.user.gender,
+      //   email: this.user.email,
+      //   birthday: this.user.birthday
+      // };
+      // if (this.user.avatar.indexOf('data:') == -1) {
+      //   data.avatar = this.user.avatar
+      // }
+      this.setProfile(this.user).then(res => {
         return res.body
       }).then(res => {
         this.modalLoading = false

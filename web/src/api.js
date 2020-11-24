@@ -33,6 +33,6 @@ export default {
 
   // 设置用户信息
   setProfile (data) {
-    return Vue.resource(API_ROOT + '/user/profile').get(data)
+    return Vue.resource(API_ROOT + '/user/profile').save(data)
   }
 }
