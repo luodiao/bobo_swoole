@@ -28,6 +28,21 @@ body {
   }
 }
 
+.text-select .ivu-select-selection, .text-select .ivu-select-dropdown {
+  @include themeify {
+    color: themed('font_color_default');
+    background-color: themed('input_background');
+    border: 1px solid themed('input_background');
+  }
+}
+.text-select .ivu-select-item-focus {
+  @include themeify {
+    color: themed('font_color_default');
+    background-color: themed('background_secondary');
+    border: 1px solid themed('input_background');
+  }
+}
+
 .text-input input {
   border: none;
   display: block;
@@ -101,6 +116,42 @@ body {
   }
 }
 
+.ivu-modal-content { // modal
+  @include themeify {
+    background-color: themed('background_default') !important;
+  }
+
+  .ivu-modal-header {
+    @include themeify {
+      border-bottom: 1px solid themed('background_secondary') !important;
+    }
+  }
+
+  .ivu-modal-footer {
+    @include themeify {
+      border-top: 1px solid themed('background_secondary') !important;
+    }
+  }
+
+  .ivu-modal-header p, .ivu-modal-header-inner {
+    @include themeify {
+      color: themed('font_color_title') !important;
+    }
+  }
+
+  .ivu-modal-body {
+    @include themeify {
+      color: themed('font_color_default') !important;
+    }
+  }
+}
+
+.ivu-cell:hover {
+  @include themeify {
+    background-color: themed('background_secondary') !important;
+  }
+}
+
 /**
  * login and register
  */
@@ -117,14 +168,6 @@ body {
     text-align: center;
     margin-bottom: 1.25rem;
   }
-
-  // input {
-  //   margin-bottom: 1.25rem;
-  // }
-
-  // .login-card input {
-  //   margin-bottom: 0 !important;
-  // }
 }
 
 /**
@@ -288,7 +331,7 @@ body {
   }
 
   .profile-box {
-    padding: 20px;
+    padding: 20px 0;
     border-radius: 10px;
     @include themeify {
       background-color: themed('background_default');

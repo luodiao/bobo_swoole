@@ -16,6 +16,10 @@ export default {
       commit('setUser', user)
     },
 
+    setProfile ({commit}, data) {
+      return API.setProfile(data)
+    },
+
     signIn ({commit}, data) {
       return API.signIn(data)
     },

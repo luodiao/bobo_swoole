@@ -1,4 +1,8 @@
 module.exports = {
+  /** 通用 */
+  'Setup succeeded': '设置成功',
+  'Setup failed': '设置失败',
+
   /** 登录 or 注册 */
   'Sign in': '登入',
   'Sign up': '注册',
@@ -25,11 +29,26 @@ module.exports = {
   'Language': '语言',
   'Chinese': '中文',
   'English': '英文',
+  'Save': '保存',
+  'Cancel': '取消',
 
   /** 注册 */
   'The username cannot be empty': '用户名不能为空',
   'The password cannot be empty': '密码不能为空',
   'The confirm password cannot be empty': '确认密码不能为空',
   'The two passwords do not match': '两次密码不一致',
-  'The length is between {0} and {1} characters': '长度在{0}到{1}个字符之间'
+  'The length is between {0} and {1} characters': '长度在{0}到{1}个字符之间',
+
+  /** 个人页 */
+  'Absolutely empty.': '这家伙很懒，什么都没有留下。',
+  'Not set.': '未设置',
+  'Username': '用户名',
+  'Mobile': '手机号',
+  'Gender': '性别',
+  'Birthday': '生日',
+  'Email': '邮箱',
+  'The email format is incorrect': '邮箱格式不正确',
+  'Unknown': '保密',
+  'Male': '男',
+  'Female': '女'
 }

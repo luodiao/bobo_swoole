@@ -29,5 +29,10 @@ export default {
   // 退出登录
   logout () {
     return Vue.resource(API_ROOT + '/user/logout').get()
+  },
+
+  // 设置用户信息
+  setProfile (data) {
+    return Vue.resource(API_ROOT + '/user/profile').get(data)
   }
 }
