@@ -491,4 +491,17 @@ CREATE TABLE `bobo_version` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='版本表';
 
+-- ----------------------------
+--  Table structure for `bobo_user_friends`
+-- ----------------------------
+DROP TABLE IF EXISTS `bobo_user_friends`;
+CREATE TABLE `bobo_user_friends` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
+  `friend_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '好友ID',
+  `initial` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '昵称首字母',
+  `status` enum('pending','pass','reject') COLLATE utf8mb4_unicode_ci DEFAULT 'pending' COMMENT '状态',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户好友表';
+
 SET FOREIGN_KEY_CHECKS = 1;
