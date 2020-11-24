@@ -30,6 +30,38 @@ class User extends Api
     }
 
     /**
+     * 获取用户信息
+     *
+     * @author gaox
+     * 
+     * @param string $account 账号
+     */
+    public function find()
+    {
+        $account = $this->request->request('account');
+        if (!$account) {
+            $this->error(__('Invalid parameters'));
+        }
+
+        $field = Validate::is($account, 'email')
+            ? 'email'
+            : (Validate::regex($account, '/^1\d{10}$/') ? 'mobile' : 'username');
+
+        $user = \app\common\model\User::get([$field => $account]);
+        if (!$user) {
+            $this->error('user does not exist');
+        }
+
+        $this->success(__('Logged in successful'), [
+            'id'       => $user->id,
+            'nickname' => $user->nickname,
+            'avatar'   => $user->avatar,
+            'bio'      => $user->bio,
+            'gender'   => $user->gender,
+        ]);
+    }
+
+    /**
      * 会员登录
      *
      * @param string $account  账号

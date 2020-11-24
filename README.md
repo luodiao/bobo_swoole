@@ -10,6 +10,7 @@ Bobo-swoole是一款基于ThinkPHP5+vue的及时聊天系统
     - /api/user/login 登录
     - /api/user/register 注册
     - /api/user/logout 登出
+    - /api/user/find 获取用户信息
     - /api/user/profile 个人信息设置
     - /api/userFriends/add 添加好友
     - /api/userFriends/remove 删除

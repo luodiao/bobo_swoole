@@ -32,7 +32,6 @@ class Userfriends extends Api
             $this->error(__('Invalid parameters'));
         }
 
-        $user  = $this->auth->getUser();
         $field = Validate::is($account, 'email')
             ? 'email'
             : (Validate::regex($account, '/^1\d{10}$/') ? 'mobile' : 'username');
