@@ -99,7 +99,7 @@ class Friends extends Api
         $m = UserFriendsModel::get($id);
         $m->status = $action;
 
-        if ($m->sava()) {
+        if ($m->save()) {
             $this->success('successful');
         } else {
             $this->error('failed');
