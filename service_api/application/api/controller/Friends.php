@@ -26,7 +26,7 @@ class Friends extends Api
      */
     public function add()
     {
-        $account = $this->request->request('account');
+        $account = $this->request->param('account');
         if (!$account) {
             $this->error(__('Invalid parameters'));
         }
@@ -66,7 +66,7 @@ class Friends extends Api
      */
     public function remove()
     {
-        $id = $this->request->request('id');
+        $id = $this->request->param('id');
         if (!$id) {
             $this->error(__('Invalid parameters'));
         }
