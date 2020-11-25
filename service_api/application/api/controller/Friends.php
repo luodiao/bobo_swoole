@@ -96,7 +96,7 @@ class Friends extends Api
             $this->error(__('Invalid parameters'));
         }
 
-        $m = UserFriendsModel::get(['id' => $id]);
+        $m = UserFriendsModel::get($id);
         $m->status = $action;
 
         if ($m->sava()) {
@@ -113,7 +113,7 @@ class Friends extends Api
      */
     public function list()
     {
-        $list = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.user_id')
+        $list = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
             ->where(['bobo_user_friends.user_id' => $this->auth->id])
             ->where('bobo_user_friends.status', ['=', 'pending'], ['=', 'pass'], 'or')
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')

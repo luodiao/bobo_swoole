@@ -2,8 +2,8 @@ import API from '../api'
 
 export default {
   state: {
-    friendsPending: {},
-    friendsList: {}
+    friendsPending: [],
+    friendsList: []
   },
 
   mutations: {
@@ -16,6 +16,10 @@ export default {
   actions: {
     friendsAdd ({commit}, data) {
       return API.friendsAdd(data)
+    },
+
+    friendsTask ({commit}, data) {
+      return API.friendsTask(data)
     },
 
     friendsList ({commit}) {

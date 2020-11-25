@@ -58,5 +58,6 @@ module.exports = {
   'Pass': 'Pass',
   'Reject': 'Reject',
   'Add friends': 'Add friends',
-  'Notifications': 'Notifications'
+  'Notifications': 'Notifications',
+  'No friends': 'No friends'
 }

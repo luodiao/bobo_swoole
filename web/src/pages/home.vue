@@ -139,7 +139,7 @@ export default {
   computed: {
     ...mapState({
       user: state => state.sign.user,
-      firendsPending: state => state.firendsPending
+      firendsPending: state => state.friends.friendsPending
     }),
     activeMenuData: {
       get () {

@@ -39,130 +39,55 @@
       </List>
     </Row>
 
-    <Row>
+    <Row v-if="friendsPending.length > 0">
       <div class="mb-6"><Icon type="md-notifications-outline" /> {{$t('Notifications')}}</div>
       <List>
-        <ListItem class="list-item mb-6">
+        <ListItem class="list-item mb-6" v-for="(item,inx) in friendsPending" :key="inx">
           <ListItemMeta>
             <template slot="avatar">
-              <Avatar size="large" icon="ios-person" />
+              <Avatar size="large" :src="item.avatar" icon="ios-person" />
             </template>
             <template slot="title">
               <h6 class="nick">
-                Bootstrap Themes
+                {{item.nickname}}
               </h6>
             </template>
             <template slot="description">
-              <p class="description">This is description, this is description.</p>
+              <p class="description">{{search.result.bio ? search.result.bio : $t('Absolutely empty.')}}</p>
             </template>
           </ListItemMeta>
 
           <template slot="action">
             <li>
-              <a class="text-success" href="">{{$t('Pass')}}</a>
+              <a class="text-success" @click="auditFriends('pass', item, inx)">{{$t('Pass')}}</a>
             </li>
             <li>
-              <a class="text-danger" href="">{{$t('Reject')}}</a>
+              <a class="text-danger" @click="auditFriends('reject', item, inx)">{{$t('Reject')}}</a>
             </li>
           </template>
         </ListItem>
       </List>
     </Row>
 
-    <Row>
+    <Row v-if="friendsList.length == 0" class="none">{{$t('No friends')}}</Row>
+
+    <Row v-for="(friends,inx) in friendsIndexes" :key="inx" v-if="friends.length > 0">
       <div class="mb-6">A</div>
       <List>
-        <ListItem class="list-item mb-6">
-          <ListItemMeta>
-            <template slot="avatar">
-              <Badge dot>
-                <Avatar size="large" icon="ios-person" />
-              </Badge>
-            </template>
-            <template slot="title">
-              <h6 class="nick">
-                Bootstrap Themes
-              </h6>
-            </template>
-            <template slot="description">
-              <p class="description">This is description, this is description.</p>
-            </template>
-          </ListItemMeta>
-        </ListItem>
-
-        <ListItem class="list-item mb-6">
+        <ListItem class="list-item mb-6" v-for="(item,key) in friends" :key="key">
           <ListItemMeta>
             <template slot="avatar">
               <Badge>
-                <Avatar style="background-color: #ff9900" size="large">U</Avatar>
+                <Avatar size="large" :src="item.avatar" icon="ios-person" />
               </Badge>
             </template>
             <template slot="title">
               <h6 class="nick">
-                Bootstrap Themes
+                {{item.nickname}}
               </h6>
             </template>
             <template slot="description">
-              <p class="description">This is description, this is description.</p>
-            </template>
-          </ListItemMeta>
-        </ListItem>
-      </List>
-    </Row>
-
-    <Row>
-      <div class="mb-6">B</div>
-      <List>
-        <ListItem class="list-item mb-6">
-          <ListItemMeta>
-            <template slot="avatar">
-              <Badge dot>
-                <Avatar size="large" icon="ios-person" />
-              </Badge>
-            </template>
-            <template slot="title">
-              <h6 class="nick">
-                Bootstrap Themes
-              </h6>
-            </template>
-            <template slot="description">
-              <p class="description">This is description, this is description.</p>
-            </template>
-          </ListItemMeta>
-        </ListItem>
-
-        <ListItem class="list-item mb-6">
-          <ListItemMeta>
-            <template slot="avatar">
-              <Badge>
-                <Avatar style="background-color: #ff9900" size="large">U</Avatar>
-              </Badge>
-            </template>
-            <template slot="title">
-              <h6 class="nick">
-                Bootstrap Themes
-              </h6>
-            </template>
-            <template slot="description">
-              <p class="description">This is description, this is description.</p>
-            </template>
-          </ListItemMeta>
-        </ListItem>
-
-        <ListItem class="list-item mb-6">
-          <ListItemMeta>
-            <template slot="avatar">
-              <Badge>
-                <Avatar src="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" size="large" icon="ios-person" />
-              </Badge>
-            </template>
-            <template slot="title">
-              <h6 class="nick">
-                Bootstrap Themes
-              </h6>
-            </template>
-            <template slot="description">
-              <p class="description">This is description, this is description.</p>
+              <p class="description">{{item.bio ? item.bio : $t('Absolutely empty.')}}</p>
             </template>
           </ListItemMeta>
         </ListItem>
@@ -172,7 +97,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'adderss-view',
@@ -188,8 +113,28 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      friendsList: state => state.friends.friendsList,
+      friendsPending: state => state.friends.friendsPending
+    }),
+    friendsIndexes () {
+      let indexes = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': [], '#': []}
+
+      this.friendsList.forEach(row => {
+        if (indexes[row.initial]) {
+          indexes[row.initial].push(row)
+        } else {
+          indexes['#'].push(row)
+        }
+      })
+
+      return indexes
+    }
+  },
+
   methods: {
-    ...mapActions(['findUser', 'friendsAdd']),
+    ...mapActions(['findUser', 'friendsAdd', 'friendsTask']),
     init () {
       this.search = {
         friendKey: '',
@@ -230,6 +175,32 @@ export default {
 
         this.init()
         this.$Message.success(res.msg)
+      })
+    },
+    auditFriends (type, row, inx) {
+      this.friendsTask({
+        id: row.id,
+        action: type
+      }).then(res => {
+        return res.body
+      }).then(res => {
+        if (res.code === 0) {
+          this.$Message.error(res.msg)
+          return false
+        }
+
+        if (type === 'reject') {
+          this.friendsPending.splice(inx, 1)
+          this.$Message.success(this.$t('Setup succeeded'))
+          return false
+        }
+
+        if (type === 'pass') {
+          this.friendsList.push(row)
+          this.friendsPending.splice(inx, 1)
+          this.$Message.success(this.$t('Setup succeeded'))
+          return false
+        }
       })
     }
   },

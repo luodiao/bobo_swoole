@@ -58,5 +58,6 @@ module.exports = {
   'Pass': '通过',
   'Reject': '拒绝',
   'Add friends': '添加友好',
-  'Notifications': '消息通知'
+  'Notifications': '消息通知',
+  'No friends': '暂无好友'
 }

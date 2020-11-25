@@ -46,6 +46,11 @@ export default {
     return Vue.resource(API_ROOT + '/friends/add').save(data)
   },
 
+  // 处理申请好友请求 (添加 or 删除)
+  friendsTask (data) {
+    return Vue.resource(API_ROOT + '/friends/task').save(data)
+  },
+
   // 好友列表
   friendsList () {
     return Vue.resource(API_ROOT + '/friends/list').save()
