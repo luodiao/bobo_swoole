@@ -11,6 +11,7 @@ use think\Exception;
 use think\Hook;
 use think\Request;
 use think\Validate;
+use Overtrue\Pinyin\Pinyin;
 
 class Auth
 {
@@ -146,6 +147,7 @@ class Auth
         $ip = request()->ip();
         $time = time();
 
+        $pinyin = new Pinyin();
         $data = [
             'username' => $username,
             'password' => $password,
@@ -165,6 +167,7 @@ class Auth
             'prevtime'  => $time,
             'status'    => 'normal'
         ]);
+        $params['initial']  = strtoupper(substr($pinyin->abbr($params['nickname']), 0, 1));
         $params['password'] = $this->getEncryptPassword($password, $params['salt']);
         $params = array_merge($params, $extend);
 
