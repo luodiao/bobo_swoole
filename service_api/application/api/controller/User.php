@@ -55,6 +55,7 @@ class User extends Api
 
         $this->success(__('Logged in successful'), [
             'id'       => $user->id,
+            'username' => $user->username,
             'nickname' => $user->nickname,
             'avatar'   => $user->avatar,
             'bio'      => $user->bio,

@@ -6,6 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     // 登录注册模块
-    sign: require('./signStore').default
+    sign: require('./signStore').default,
+
+    // 通讯录模块
+    friends: require('./friendsStore').default
   }
 })

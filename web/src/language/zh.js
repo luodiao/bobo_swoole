@@ -50,5 +50,13 @@ module.exports = {
   'The email format is incorrect': '邮箱格式不正确',
   'Unknown': '保密',
   'Male': '男',
-  'Female': '女'
+  'Female': '女',
+
+  /** 通讯录 */
+  'Search for users...': '搜索用户...',
+  'Search result': '搜索结果',
+  'Pass': '通过',
+  'Reject': '拒绝',
+  'Add friends': '添加友好',
+  'Notifications': '消息通知'
 }

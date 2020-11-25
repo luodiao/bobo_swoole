@@ -34,5 +34,15 @@ export default {
   // 设置用户信息
   setProfile (data) {
     return Vue.resource(API_ROOT + '/user/profile').save(data)
+  },
+
+  // 获取用户信息
+  findUser (data) {
+    return Vue.resource(API_ROOT + '/user/find').get(data)
+  },
+
+  // 添加好友
+  friendsAdd (data) {
+    return Vue.resource(API_ROOT + '/friends/add').get(data)
   }
 }

@@ -38,6 +38,19 @@ body {
   text-decoration: underline dotted !important;
 }
 
+.text-success {
+  color: #19be6b !important;
+}
+.text-primary {
+  color: #2d8cf0 !important;
+}
+.text-warning {
+  color: #ff9900 !important;
+}
+.text-danger {
+  color: #ed4014 !important;
+}
+
 .text-select .ivu-select-selection, .text-select .ivu-select-dropdown {
   @include themeify {
     color: themed('font_color_default');
@@ -72,6 +85,15 @@ body {
   @include themeify {
     color: themed('font_color_default');
     background-color: themed('input_background');
+    border: 1px solid themed('input_background');
+  }
+}
+
+.ivu-input-group-append {
+  width: 50px !important;
+
+  @include themeify {
+    background-color: themed("input_background") !important;
     border: 1px solid themed('input_background');
   }
 }

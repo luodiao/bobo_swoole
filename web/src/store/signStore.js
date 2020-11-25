@@ -30,6 +30,10 @@ export default {
 
     logout ({commit}) {
       return API.logout()
+    },
+
+    findUser ({commit}, data) {
+      return API.findUser(data)
     }
   }
 }

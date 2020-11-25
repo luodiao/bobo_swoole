@@ -50,5 +50,13 @@ module.exports = {
   'The email format is incorrect': 'The email format is incorrect',
   'Unknown': 'Unknown',
   'Male': 'Male',
-  'Female': 'Female'
+  'Female': 'Female',
+
+  /** 通讯录 */
+  'Search for users...': 'Search for users...',
+  'Search result': 'Search result',
+  'Pass': 'Pass',
+  'Reject': 'Reject',
+  'Add friends': 'Add friends',
+  'Notifications': 'Notifications'
 }
