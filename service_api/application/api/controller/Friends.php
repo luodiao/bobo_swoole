@@ -118,7 +118,7 @@ class Friends extends Api
             ->where(['status', 'in', ['pending, pass']])
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
             ->order('bobo_user.initial ASC')
-            ->all();
+            ->select();
 
 
         $this->success('successful', $list);
