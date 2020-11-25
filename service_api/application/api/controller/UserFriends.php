@@ -6,7 +6,6 @@ use app\common\controller\Api;
 use app\common\model\UserFriends as UserFriendsModel;
 use app\common\model\User as UserModel;
 use think\Validate;
-use Overtrue\Pinyin\Pinyin;
 
 /**
  * 用户好友接口
@@ -46,12 +45,10 @@ class Userfriends extends Api
             $this->success('successful');
         }
 
-        $pinyin = new Pinyin();
 
         $m = new UserFriendsModel;
         $m->user_id   = $this->auth->id;
         $m->friend_id = $friend->id;
-        $m->initial   = strtoupper(substr($pinyin->abbr($friend->nickname), 0, 1));
         $m->status    = 'pending';
         if ($m->save()) {
             $this->success('successful');

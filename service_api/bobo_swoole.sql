@@ -340,6 +340,7 @@ CREATE TABLE `bobo_user` (
   `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '组别ID',
   `username` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '用户名',
   `nickname` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '昵称',
+  `initial` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '昵称首字母',
   `password` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '密码',
   `salt` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '密码盐',
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '电子邮箱',
@@ -499,7 +500,6 @@ CREATE TABLE `bobo_user_friends` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '会员ID',
   `friend_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '好友ID',
-  `initial` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '昵称首字母',
   `status` enum('pending','pass','reject') COLLATE utf8mb4_unicode_ci DEFAULT 'pending' COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户好友表';

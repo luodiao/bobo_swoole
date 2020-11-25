@@ -7,6 +7,7 @@ use app\common\library\Ems;
 use app\common\library\Sms;
 use fast\Random;
 use think\Validate;
+use Overtrue\Pinyin\Pinyin;
 
 /**
  * 会员接口
@@ -216,7 +217,10 @@ class User extends Api
                 $this->error(__('Nickname already exists'));
             }
 
+            $pinyin = new Pinyin();
+
             $user->nickname = $nickname;
+            $user->initial  = strtoupper(substr($pinyin->abbr($nickname), 0, 1));
         }
         if ($email) {
             $exists = \app\common\model\User::where('email', $email)

@@ -1,7 +1,7 @@
 <template>
   <Row class="component">
     <h2 class="font-title mb-6">{{$t('Friends')}}</h2>
-    <Input size="large" class="text-input mb-6" :placeholder="$t('Search for messages or users...')" suffix="ios-search" />
+    <Input size="large" class="text-input mb-6" :placeholder="$t('Search for messages or users...')" search enter-button />
     <Row>
       <div class="mb-6">A</div>
       <List>
