@@ -2,12 +2,14 @@ import API from '../api'
 
 export default {
   state: {
-    friends: {}
+    friendsPending: {},
+    friendsList: {}
   },
 
   mutations: {
     friendsList (state, result) {
-      state.friends = result
+      state.friendsPending = result.pending
+      state.friendsList = result.list
     }
   },
 

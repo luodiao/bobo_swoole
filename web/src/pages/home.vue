@@ -8,7 +8,7 @@
         <Icon type="ios-chatbubbles" />
       </div>
       <div class="bar-icon" :class="{'active':actvieMenu == 'address'}" @click="swtichMenu('address')">
-        <Badge dot>
+        <Badge :dot="firendsPending.length > 0">
           <Icon type="md-list-box" />
         </Badge>
       </div>
@@ -138,7 +138,8 @@ export default {
 
   computed: {
     ...mapState({
-      user: state => state.sign.user
+      user: state => state.sign.user,
+      firendsPending: state => state.firendsPending
     }),
     activeMenuData: {
       get () {

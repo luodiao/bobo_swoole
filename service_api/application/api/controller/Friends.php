@@ -138,6 +138,6 @@ class Friends extends Api
         }
         unset($value);
 
-        $this->success('successful', $list);
+        $this->success('successful', $result);
     }
 }
