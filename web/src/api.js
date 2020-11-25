@@ -43,6 +43,6 @@ export default {
 
   // 添加好友
   friendsAdd (data) {
-    return Vue.resource(API_ROOT + '/friends/add').get(data)
+    return Vue.resource(API_ROOT + '/friends/add').save(data)
   }
 }

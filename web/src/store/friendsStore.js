@@ -2,7 +2,6 @@ import API from '../api'
 
 export default {
   state: {
-    
   },
 
   mutations: {
@@ -14,6 +13,6 @@ export default {
   actions: {
     friendsAdd ({commit}, data) {
       return API.friendsAdd(data)
-    },
+    }
   }
 }

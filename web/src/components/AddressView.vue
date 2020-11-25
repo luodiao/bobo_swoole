@@ -219,7 +219,12 @@ export default {
     addFriends () {
       this.$set(this.search, 'addFriendLoading', true)
 
-      this.friendsAdd({account: this.search.result.username}).then()
+      this.friendsAdd({account: this.search.result.username}).then(res => {
+        return res.body
+      }).then(res => {
+        this.$set(this.search, 'addFriendLoading', false)
+        console.log(res)
+      })
     }
   },
 
