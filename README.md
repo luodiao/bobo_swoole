@@ -14,7 +14,7 @@ Bobo-swoole是一款基于ThinkPHP5+vue的及时聊天系统
     - /api/user/profile 个人信息设置
     - /api/friends/add 添加好友
     - /api/friends/remove 删除
-    - /api/friends/wait 好友消息待处理
+    - /api/friends/task 处理申请好友请求
     - /api/friends/list 好友列表
 
 * Web

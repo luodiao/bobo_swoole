@@ -2,7 +2,6 @@
 
 namespace app\common\model;
 
-use think\Cache;
 use think\Model;
 
 /**

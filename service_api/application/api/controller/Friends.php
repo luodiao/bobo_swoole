@@ -81,13 +81,29 @@ class Friends extends Api
     }
 
     /**
-     * 待处理 (被添加好友未处理)
+     * 处理申请好友请求 (添加 or 删除)
      *
      * @author gaox
+     *
+     * @param int    $id     待处理id
+     * @param string $action 操作 pass=通过 reject=拒绝
      */
-    public function wait()
+    public function task()
     {
+        $id     = $this->request->param('id');
+        $action = $this->request->param('action');
+        if (!$id || !$action) {
+            $this->error(__('Invalid parameters'));
+        }
 
+        $m = UserFriendsModel::get(['id' => $id]);
+        $m->status = $action;
+
+        if ($m->sava()) {
+            $this->success('successful');
+        } else {
+            $this->error('failed');
+        }
     }
 
     /**
@@ -97,6 +113,14 @@ class Friends extends Api
      */
     public function list()
     {
+        $list = (new UserFriendsModel)->join('bobo_user ON bobo_user.id=bobo_user_friends.user_id')
+            ->where('user_id', $this->auth->id)
+            ->where(['status', 'in', ['pending, pass']])
+            ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
+            ->order('bobo_user.initial ASC')
+            ->all();
 
+
+        $this->success('successful', $list);
     }
 }
