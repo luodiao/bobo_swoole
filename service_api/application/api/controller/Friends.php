@@ -120,9 +120,20 @@ class Friends extends Api
             ->order('bobo_user.initial ASC')
             ->limit(1000)
             ->select();
+
+        $result = [
+            'pending' => [],
+            'list'    => []
+        ];
         foreach ($list as &$value) {
             if ($value->avatar == '') {
                 $value->avatar = letter_avatar($value->nickname);
+            }
+
+            if ($value->status == 'pending') {
+                $result['pending'][] = $value;
+            } else {
+                $result['list'][] = $value;
             }
         }
         unset($value);
