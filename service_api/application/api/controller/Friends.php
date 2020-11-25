@@ -10,7 +10,7 @@ use think\Validate;
 /**
  * 用户好友接口
  */
-class Userfriends extends Api
+class Friends extends Api
 {
     public function _initialize()
     {
