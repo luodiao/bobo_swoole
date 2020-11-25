@@ -8,7 +8,9 @@
         <Icon type="ios-chatbubbles" />
       </div>
       <div class="bar-icon" :class="{'active':actvieMenu == 'address'}" @click="swtichMenu('address')">
-        <Icon type="md-list-box" />
+        <Badge dot>
+          <Icon type="md-list-box" />
+        </Badge>
       </div>
       <div class="bar-icon" :class="{'active':actvieMenu == 'profile'}"  @click="swtichMenu('profile')">
         <Icon type="md-person" />
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -178,9 +180,14 @@ export default {
   },
 
   methods: {
+    ...mapActions(['friendsList']),
     swtichMenu (menu) {
       this.activeMenuData = menu
     }
+  },
+
+  created () {
+    this.friendsList()
   }
 }
 </script>

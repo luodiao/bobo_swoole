@@ -223,7 +223,13 @@ export default {
         return res.body
       }).then(res => {
         this.$set(this.search, 'addFriendLoading', false)
-        console.log(res)
+        if (res.code === 0) {
+          this.$Message.error(res.msg)
+          return false
+        }
+
+        this.init()
+        this.$Message.success(res.msg)
       })
     }
   },
