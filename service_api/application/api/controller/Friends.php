@@ -13,7 +13,7 @@ use think\Validate;
 class Friends extends Api
 {
     protected $noNeedRight = '*';
-    
+
     public function _initialize()
     {
         parent::_initialize();
@@ -43,7 +43,7 @@ class Friends extends Api
         }
 
         $userFriend = UserFriendsModel::get(['user_id' => $this->auth->id, 'friend_id' => $friend->id]);
-        if ($userFriend->status == 'pending' || $userFriend->status == 'pass') {
+        if ($userFriend && ($userFriend->status == 'pending' || $userFriend->status == 'pass')) {
             $this->success('successful');
         }
 
