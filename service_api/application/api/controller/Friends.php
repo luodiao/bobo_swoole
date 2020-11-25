@@ -12,6 +12,8 @@ use think\Validate;
  */
 class Friends extends Api
 {
+    protected $noNeedRight = '*';
+    
     public function _initialize()
     {
         parent::_initialize();
