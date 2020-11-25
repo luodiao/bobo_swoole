@@ -114,8 +114,8 @@ class Friends extends Api
     public function list()
     {
         $list = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.user_id')
-            ->where('user_id', $this->auth->id)
-            ->where(['status', 'in', ['pending, pass']])
+            ->where(['user_id' => $this->auth->id])
+            ->where('status', ['=', 'pending'], ['=', 'pass'], 'and')
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
             ->order('bobo_user.initial ASC')
             ->limit(1000)
