@@ -53,7 +53,7 @@
               </h6>
             </template>
             <template slot="description">
-              <p class="description">{{search.result.bio ? search.result.bio : $t('Absolutely empty.')}}</p>
+              <p class="description">{{item.bio ? item.bio : $t('Absolutely empty.')}}</p>
             </template>
           </ListItemMeta>
 

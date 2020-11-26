@@ -98,12 +98,19 @@ class Friends extends Api
 
         $m = UserFriendsModel::get($id);
         $m->status = $action;
-
-        if ($m->save()) {
-            $this->success('successful');
-        } else {
+        if (!$m->save()) {
             $this->error('failed');
         }
+
+        if ($action == 'pass') {
+            $friend = new UserFriendsModel;
+            $friend->user_id   = $this->auth->id;
+            $friend->friend_id = $m->user_id;
+            $friend->status    = 'pass';
+            $friend->save();
+        }
+
+        $this->success('successful');
     }
 
     /**
