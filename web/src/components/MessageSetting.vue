@@ -53,6 +53,54 @@
           <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
           <div class="comments"><div class="arrow"></div>123</div>
         </div>
+
+        <div class="received-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments">
+            123123123123123123123123123123123123123123123123
+            <small class="text-time">12:00</small>
+          </div>
+        </div>
+        <div class="received-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments"><div class="arrow"></div>123</div>
+        </div>
+
+        <div class="send-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments">
+            123123123123123123123123123123123123123123123123
+            <small class="text-time">12:00</small>
+          </div>
+        </div>
+        <div class="send-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments"><div class="arrow"></div>123</div>
+        </div>
+
+        <div class="received-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments">
+            123123123123123123123123123123123123123123123123
+            <small class="text-time">12:00</small>
+          </div>
+        </div>
+        <div class="received-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments"><div class="arrow"></div>123</div>
+        </div>
+
+        <div class="send-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments">
+            123123123123123123123123123123123123123123123123
+            <small class="text-time">12:00</small>
+          </div>
+        </div>
+        <div class="send-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments"><div class="arrow"></div>123</div>
+        </div>
       </div>
 
       <div class="footer">
@@ -62,7 +110,7 @@
               <Poptip v-model="smileys.visible" placement="top" width="250" title="Smileys & People">
                 <Icon class="pointer" type="md-happy" size="25"></Icon>
                 <div slot="content">
-                  <span class="emoji-box mb-2 pointer" style="font-size: 20px;" :span="3" v-for="(item,inx) in smileys.list" @click="selectSmileys(item)">{{item}}</span>
+                  <span class="emoji-box mb-2 pointer" style="font-size: 20px;" :span="3" v-for="(item,inx) in smileys.list" @click="selectSmileys(item)" :key="inx">{{item}}</span>
                 </div>
               </Poptip>
             </span>

@@ -471,6 +471,7 @@ body {
 
   .content {
     height: calc(100vh - 73px - 73px);
+    overflow: auto;
 
     .received-box, .send-box {
       margin-top: 10px;
