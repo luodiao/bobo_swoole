@@ -1,12 +1,12 @@
 <?php
 namespace app\server\controller;
 
-use think\Swoole\Server;
+use think\swoole\Server;
 
 class Websocket extends Server{
     protected $host = '0.0.0.0';
     protected $port = 9502;
-    protected $sockType = "socket";
+    protected $serverType = "socket";
     protected $option = [
         'worker_num'	=> 4,//设置启动的Worker进程数
         'daemonize'	=> false,//守护进程化（上线改为true）
@@ -50,7 +50,7 @@ class Websocket extends Server{
         echo "用户{$uid}建立了连接,标识为{$fd}\n";
     }
     //接收数据时回调函数
-    public function Message($server,$frame){
+    public function onMessage($server,$frame){
         $fd = $frame->fd;
         $message = $frame->data;
 
