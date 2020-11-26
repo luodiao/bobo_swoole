@@ -2,6 +2,7 @@ module.exports = {
   /** 通用 */
   'Setup succeeded': '设置成功',
   'Setup failed': '设置失败',
+  'Delete': '删除',
 
   /** 登录 or 注册 */
   'Sign in': '登入',

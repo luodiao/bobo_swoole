@@ -50,6 +50,16 @@ body {
 .text-danger {
   color: #ed4014 !important;
 }
+.text-empty {
+  text-align: center;
+  margin-top: 10%;
+  font-size: 20px;
+  font-weight: 500;
+  // color: #e8eaec;
+  @include themeify {
+    color: themed('text_muted');
+  }
+}
 
 .text-select .ivu-select-selection, .text-select .ivu-select-dropdown {
   @include themeify {

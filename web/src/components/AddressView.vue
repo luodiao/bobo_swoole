@@ -69,7 +69,7 @@
       </List>
     </Row>
 
-    <Row v-if="friendsList.length == 0" class="none">{{$t('No friends')}}</Row>
+    <Row v-if="friendsList.length == 0" class="text-empty">{{$t('No friends')}}</Row>
 
     <Row v-for="(friends,inx) in friendsIndexes" :key="inx" v-if="friends.length > 0">
       <div class="mb-6">A</div>
@@ -84,6 +84,16 @@
             <template slot="title">
               <h6 class="nick">
                 {{item.nickname}}
+                <small>
+                  <Dropdown trigger="click" placement="bottom-end">
+                    <a href="javascript:void(0)">
+                      <Icon type="md-more" size="15" />
+                    </a>
+                    <DropdownMenu slot="list">
+                      <DropdownItem class="text-danger" @click.native="removeFriends(item, inx)">{{$t('Delete')}}</DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                </small>
               </h6>
             </template>
             <template slot="description">
@@ -134,7 +144,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['findUser', 'friendsAdd', 'friendsTask']),
+    ...mapActions(['findUser', 'friendsAdd', 'friendsTask', 'friendsRemove']),
     init () {
       this.search = {
         friendKey: '',
@@ -202,6 +212,19 @@ export default {
           return false
         }
       })
+    },
+    removeFriends (row, inx) {
+      this.friendsRemove({id: row.friend_id}).then(res => {
+        return res.body
+      }).then(res => {
+        if (res.code === 0) {
+          this.$Message.error(res.msg)
+          return false
+        }
+
+        this.friendsList.splice(inx, 1)
+        this.$Message.success(this.$t('Setup succeeded'))
+      })
     }
   },
 
@@ -210,7 +233,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

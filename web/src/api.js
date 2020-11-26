@@ -54,5 +54,10 @@ export default {
   // 好友列表
   friendsList () {
     return Vue.resource(API_ROOT + '/friends/list').save()
+  },
+
+  // 删除好友
+  friendsRemove (data) {
+    return Vue.resource(API_ROOT + '/friends/remove').save(data)
   }
 }

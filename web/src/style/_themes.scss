@@ -6,6 +6,7 @@ $themes: (
     font_color_title: #242939,
     primary: #000000,
     input_background: #EDEEF6,
+    text_muted: #e8eaec,
   ),
   dark: (
     background_default: #29242A,
@@ -14,6 +15,7 @@ $themes: (
     font_color_title: #ffffff,
     primary: #2d8cf0,
     input_background: #2d3238,
+    text_muted: #4c4e50,
   ),
   vip: (
     background_default: #36373B,
@@ -22,5 +24,6 @@ $themes: (
     font_color_title: #f6ca9d,
     primary: #f6ca9d,
     input_background: #2d3238,
+    text_muted: #4c4e50,
   )
 );

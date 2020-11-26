@@ -1,6 +1,6 @@
 <template>
   <Row class="message">
-    <Row v-if="JSON.stringify(value) == '{}'" class="none">BoBo swoole</Row>
+    <Row v-if="JSON.stringify(value) == '{}'" class="text-empty">BoBo swoole</Row>
 
     <Row v-else>
       <div class="header">
@@ -61,13 +61,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  .none {
-    text-align: center;
-    margin-top: 10%;
-    font-size: 20px;
-    font-weight: 500;
-    color: #e8eaec;
-  }
-</style>

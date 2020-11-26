@@ -28,6 +28,10 @@ export default {
       }).then(res => {
         commit('friendsList', res.data)
       })
-    }
+    },
+
+    friendsRemove ({commit}, data) {
+      return API.friendsRemove(data)
+    },
   }
 }

@@ -60,7 +60,7 @@ class Friends extends Api
     }
 
     /**
-     * 删除
+     * 删除好友
      *
      * @author gaox
      *
@@ -73,7 +73,9 @@ class Friends extends Api
             $this->error(__('Invalid parameters'));
         }
 
-        if (UserFriendsModel::destroy(['user_id' => $this->auth->id, 'friend_id' => $id])) {
+        if (UserFriendsModel::destroy(['user_id' => $this->auth->id, 'friend_id' => $id])
+            && UserFriendsModel::destroy(['user_id' => $id, 'friend_id' => $this->auth->id])
+        ) {
             $this->success('successful');
         } else {
             $this->error('failed');
