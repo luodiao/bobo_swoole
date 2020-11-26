@@ -29,7 +29,7 @@
         </List>
       </div>
 
-      <div class="content">
+      <div class="content" id="data-list-content">
         <div class="received-box">
           <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
           <div class="comments">
@@ -86,6 +86,18 @@
           </div>
         </div>
         <div class="received-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments"><div class="arrow"></div>123</div>
+        </div>
+
+        <div class="send-box">
+          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+          <div class="comments">
+            123123123123123123123123123123123123123123123123
+            <small class="text-time">12:00</small>
+          </div>
+        </div>
+        <div class="send-box">
           <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
           <div class="comments"><div class="arrow"></div>123</div>
         </div>
@@ -147,7 +159,21 @@ export default {
     }
   },
 
+  watch: {
+    value: function (val) {
+      if (JSON.stringify(val) !== '{}') {
+        this.scrollToBottom()
+      }
+    }
+  },
+
   methods: {
+    scrollToBottom () {
+      this.$nextTick(() => {
+        var div = document.getElementById('data-list-content')
+        div.scrollTop = div.scrollHeight
+      })
+    },
     goBack () {
       this.$emit('input', {})
     },
