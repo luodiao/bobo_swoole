@@ -74,8 +74,8 @@
     <Row v-for="(friends,inx) in friendsIndexes" :key="inx" v-if="friends.length > 0">
       <div class="mb-6">A</div>
       <List>
-        <ListItem class="list-item mb-6" v-for="(item,key) in friends" :key="key">
-          <ListItemMeta>
+        <ListItem class="list-item mb-6" v-for="(item,key) in friends" :key="key" >
+          <ListItemMeta @click.native="changeUser(item)">
             <template slot="avatar">
               <Badge>
                 <Avatar size="large" :src="item.avatar" icon="ios-person" />
@@ -84,22 +84,25 @@
             <template slot="title">
               <h6 class="nick">
                 {{item.nickname}}
-                <small>
-                  <Dropdown trigger="click" placement="bottom-end">
-                    <a href="javascript:void(0)">
-                      <Icon type="md-more" size="15" />
-                    </a>
-                    <DropdownMenu slot="list">
-                      <DropdownItem class="text-danger" @click.native="removeFriends(item, inx)">{{$t('Delete')}}</DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </small>
               </h6>
             </template>
             <template slot="description">
               <p class="description">{{item.bio ? item.bio : $t('Absolutely empty.')}}</p>
             </template>
           </ListItemMeta>
+
+          <template slot="action">
+            <li>
+              <Dropdown trigger="click" placement="bottom-end">
+                <a href="javascript:void(0)">
+                  <Icon type="md-more" size="15" />
+                </a>
+                <DropdownMenu slot="list">
+                  <DropdownItem class="text-danger" @click.native="removeFriends(item, inx)">{{$t('Delete')}}</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </li>
+          </template>
         </ListItem>
       </List>
     </Row>
@@ -107,10 +110,15 @@
 </template>
 
 <script>
+import Conf from '../config/conf.json'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'adderss-view',
+
+  props: {
+    value: Object
+  },
 
   data () {
     return {
@@ -129,7 +137,7 @@ export default {
       friendsPending: state => state.friends.friendsPending
     }),
     friendsIndexes () {
-      let indexes = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': [], '#': []}
+      let indexes = JSON.parse(JSON.stringify(Conf.indexes))
 
       this.friendsList.forEach(row => {
         if (indexes[row.initial]) {
@@ -225,6 +233,9 @@ export default {
         this.friendsList.splice(inx, 1)
         this.$Message.success(this.$t('Setup succeeded'))
       })
+    },
+    changeUser (user) {
+      this.$emit('input', user)
     }
   },
 

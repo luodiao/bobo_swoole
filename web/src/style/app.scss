@@ -55,7 +55,6 @@ body {
   margin-top: 10%;
   font-size: 20px;
   font-weight: 500;
-  // color: #e8eaec;
   @include themeify {
     color: themed('text_muted');
   }
@@ -129,6 +128,10 @@ body {
 
 .mb-6 {
   margin-bottom: 1.25rem!important;
+}
+
+.mb-2 {
+  margin-bottom: 0.41rem!important;
 }
 
 .button-group {
@@ -468,6 +471,65 @@ body {
 
   .content {
     height: calc(100vh - 73px - 73px);
+
+    .received-box, .send-box {
+      margin-top: 10px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .received-box .comments, .received-box .avatar, .send-box .comments, .send-box .avatar {
+      display: block;
+    }
+
+    .received-box .comments, .send-box .comments {
+      padding: 10px;
+      max-width: 80%;
+      word-wrap:break-word; 
+      word-break:break-all; 
+      overflow: hidden;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .received-box {
+      .comments, .avatar {
+        float: left;
+      }
+      .comments {
+        margin-left: 10px;
+        
+        @include themeify {
+          color: themed('font_color_title') !important;
+          background-color: themed('background_secondary') !important;
+        }
+
+        .text-time {
+          display: block;
+          text-align: right;
+          @include themeify {
+            color: themed('font_color_default') !important;
+          }
+        }
+      }
+    }
+
+    .send-box {
+      .comments, .avatar {
+        float: right;
+      }
+      .comments {
+        margin-right: 10px;
+        background-color: #2d8cf0;
+        color: #ffffff;
+
+        .text-time {
+          display: block;
+          text-align: left;
+          color: #d2d2d2;
+        }
+      }
+    }
   }
 
   .footer {
@@ -504,6 +566,11 @@ body {
       textarea, input, .ivu-input-group-append span {
         margin-left: 10px;
       }
+    }
+
+    .emoji-box {
+      display: block;
+      float: left;
     }
   }
 

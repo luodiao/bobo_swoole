@@ -32,6 +32,6 @@ export default {
 
     friendsRemove ({commit}, data) {
       return API.friendsRemove(data)
-    },
+    }
   }
 }

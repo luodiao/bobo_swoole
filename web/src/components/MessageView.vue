@@ -12,7 +12,7 @@
           </template>
           <template slot="title">
             <h6 class="nick">
-              {{item.nick}}
+              {{item.nickname}}
               <small>{{item.datetime}}</small>
             </h6>
           </template>
