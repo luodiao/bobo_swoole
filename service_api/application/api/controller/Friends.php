@@ -120,7 +120,7 @@ class Friends extends Api
             ->limit(1000)
             ->select();
 
-        $pending = (new UserFriendsModel)->join('bobo_user', 'bobo_user.friend_id=bobo_user_friends.friend_id')
+        $pending = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.user_id')
             ->where(['bobo_user_friends.friend_id' => $this->auth->id, 'bobo_user_friends.status' => 'pending'])
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
             ->order('bobo_user.initial ASC')
