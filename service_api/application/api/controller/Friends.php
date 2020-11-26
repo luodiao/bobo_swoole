@@ -113,27 +113,41 @@ class Friends extends Api
      */
     public function list()
     {
-        $result['list'] = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
+        $list = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
             ->where(['bobo_user_friends.user_id' => $this->auth->id, 'bobo_user_friends.status' => 'pass'])
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
             ->order('bobo_user.initial ASC')
             ->limit(1000)
             ->select();
 
-        $result['pending'] = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
+        $pending = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
             ->where(['bobo_user_friends.friend_id' => $this->auth->id, 'bobo_user_friends.status' => 'pending'])
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
             ->order('bobo_user.initial ASC')
             ->limit(1000)
             ->select();
 
-        foreach ($result as $key=>$item) {
-            foreach ($item as $value) {
-                if ($value->avatar == '') {
-                    $result[$key]->avatar = letter_avatar($value->nickname);
-                }
+        $result = [
+            'pending' => [],
+            'list'    => []
+        ];
+        foreach ($list as &$value) {
+            if ($value->avatar == '') {
+                $value->avatar = letter_avatar($value->nickname);
             }
+
+            $result['list'][] = $value;
         }
+        unset($value);
+
+        foreach ($pending as &$value) {
+            if ($value->avatar == '') {
+                $value->avatar = letter_avatar($value->nickname);
+            }
+
+            $result['pending'][] = $value;
+        }
+        unset($value);
 
         $this->success('successful', $result);
     }
