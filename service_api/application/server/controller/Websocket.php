@@ -1,9 +1,9 @@
 <?php
-namespace app\index\controller;
+namespace app\server\controller;
 
 use think\Swoole\Server;
 
-class WebSocket extends Server{
+class Websocket extends Server{
     protected $host = '0.0.0.0';
     protected $port = 9502;
     protected $sockType = "socket";
