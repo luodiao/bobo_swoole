@@ -113,30 +113,27 @@ class Friends extends Api
      */
     public function list()
     {
-        $list = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
-            ->where(['bobo_user_friends.user_id' => $this->auth->id])
-            ->where('bobo_user_friends.status', ['=', 'pending'], ['=', 'pass'], 'or')
+        $result['list'] = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
+            ->where(['bobo_user_friends.user_id' => $this->auth->id, 'bobo_user_friends.status' => 'pass'])
             ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
             ->order('bobo_user.initial ASC')
             ->limit(1000)
             ->select();
 
-        $result = [
-            'pending' => [],
-            'list'    => []
-        ];
-        foreach ($list as &$value) {
-            if ($value->avatar == '') {
-                $value->avatar = letter_avatar($value->nickname);
-            }
+        $result['pending'] = (new UserFriendsModel)->join('bobo_user', 'bobo_user.id=bobo_user_friends.friend_id')
+            ->where(['bobo_user_friends.friend_id' => $this->auth->id, 'bobo_user_friends.status' => 'pending'])
+            ->field('bobo_user_friends.id, bobo_user_friends.friend_id, bobo_user_friends.status, bobo_user.username, bobo_user.nickname, bobo_user.initial, bobo_user.avatar, bobo_user.gender, bobo_user.bio, bobo_user.birthday')
+            ->order('bobo_user.initial ASC')
+            ->limit(1000)
+            ->select();
 
-            if ($value->status == 'pending') {
-                $result['pending'][] = $value;
-            } else {
-                $result['list'][] = $value;
+        foreach ($result as $key=>$item) {
+            foreach ($item as $value) {
+                if ($value->avatar == '') {
+                    $result[$key]->avatar = letter_avatar($value->nickname);
+                }
             }
         }
-        unset($value);
 
         $this->success('successful', $result);
     }
