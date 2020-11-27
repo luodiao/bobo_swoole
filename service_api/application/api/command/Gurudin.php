@@ -49,7 +49,7 @@ class Gurudin extends Command
 
     private function start(Output $output)
     {
-        $ws = new Websocket('127.0.0.1', 9502, true, $output);
+        $ws = new Websocket('123.56.144.186', 9502, true, $output);
         $ws->listen();
     }
 
