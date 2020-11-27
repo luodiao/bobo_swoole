@@ -23,5 +23,8 @@ Bobo-swoole是一款基于ThinkPHP5+vue的及时聊天系统
     * yarn >= 1.17.3
     * node >= v12.6.0
 
+* gaox websocket
+    * php think gurudin start 启动监听
+
 ## **期望**
     * 希望波波超级大神也能参与
