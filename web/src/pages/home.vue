@@ -21,11 +21,11 @@
     </Row>
 
     <Row class="center-col">
-      <component :is="actvieMenu + '-view'" :options="settingComponentData" v-model="currentUser"></component>
+      <component :is="actvieMenu + '-view'" v-model="currentUser"></component>
     </Row>
 
     <Row class="right-col" :class="{'right-col-active':JSON.stringify(currentUser) != '{}'}">
-      <component :is="loadSettingComponent" v-model="currentUser"></component>
+      <component :is="loadSettingComponent" v-model="currentUser" v-if="JSON.stringify(currentUser) !== '{}'"></component>
     </Row>
   </Row>
 </template>
@@ -38,108 +38,15 @@ export default {
     return {
       actvieMenu: 'message', // message=消息 address=通讯录 profile=个人 setting=设置
       loadSettingComponent: 'message-setting', // 当前右侧加载组件
-      currentUser: {}, // 当前选中用户
-      initMessages: { // 信息列表
-        items: [
-          {
-            id: 1,
-            dot: true,
-            online: true,
-            nickname: 'BoBo',
-            avatar: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2070453827,1163403148&fm=26&gp=0.jpg',
-            datetime: '11:10 pm',
-            description: 'This is description'
-          },
-          {
-            id: 2,
-            dot: false,
-            online: false,
-            nickname: 'Louio',
-            avatar: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1373560079,871367259&fm=26&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 3,
-            dot: false,
-            online: true,
-            nickname: 'Air jordan',
-            avatar: '',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 4,
-            dot: false,
-            online: false,
-            nickname: 'Aaron',
-            avatar: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2271338977,1611087163&fm=26&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 5,
-            dot: false,
-            online: false,
-            nickname: 'Bart',
-            avatar: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3157220405,301754405&fm=11&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 6,
-            dot: false,
-            online: false,
-            nickname: 'Caleb',
-            avatar: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2438388894,880471568&fm=11&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 7,
-            dot: false,
-            online: false,
-            nickname: 'Dave',
-            avatar: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=939193375,2877147297&fm=11&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 8,
-            dot: false,
-            online: false,
-            nickname: 'Egbert',
-            avatar: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1101467379,169077944&fm=11&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 9,
-            dot: false,
-            online: false,
-            nickname: 'Fitzgerald',
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=640295866,1857432489&fm=11&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          },
-          {
-            id: 10,
-            dot: false,
-            online: false,
-            nickname: 'Gregary',
-            avatar: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3600877798,4182679885&fm=11&gp=0.jpg',
-            datetime: '05:10 am',
-            description: 'This is description, this is description.'
-          }
-        ]
-      }
+      currentUser: {} // 当前选中用户
     }
   },
 
   computed: {
     ...mapState({
       user: state => state.sign.user,
-      firendsPending: state => state.friends.friendsPending
+      firendsPending: state => state.friends.friendsPending,
+      friends: state => state.friends.friendsList
     }),
     activeMenuData: {
       get () {
@@ -148,18 +55,6 @@ export default {
       set (value) {
         this.actvieMenu = value
       }
-    },
-    settingComponentData () {
-      let data = {}
-      switch (this.actvieMenu) {
-        case 'message':
-          data = this.initMessages
-          break
-        default:
-          break
-      }
-
-      return data
     }
   },
 
@@ -180,24 +75,27 @@ export default {
     'message-setting': require('../components/MessageSetting').default
   },
 
+  watch: {
+    currentUser: function (value) {
+      if (JSON.stringify(value) === '{}') {
+        this.initSocket()
+      }
+    }
+  },
+
   methods: {
     ...mapActions(['friendsList']),
     swtichMenu (menu) {
       this.activeMenuData = menu
     },
     initSocket () {
-      var _this = this
-      this.$ws.connect({
-        onopen (evt) {
-          _this.$ws.send(JSON.stringify({type: 'register', uid: _this.user.id}))
-        },
-        onmessage (response) {
-          console.log('message' + response)
-        },
-        onclose (evt) {
-          console.log('close')
+      console.log('监控home')
+      this.$ws.monitor(this.user.id)
+      this.$ws.notice.call(resp => {
+        if (JSON.stringify(this.currentUser) === '{}') {
+          this.$Message.info('新消息：' + resp.data)
         }
-      }, this.user.id)
+      })
     }
   },
 

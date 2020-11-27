@@ -81,12 +81,7 @@ class Websocket
         }
 
         if ($req['type'] == 'message') {
-            $this->send($this->u->get($req['to']), json_encode([
-                'type' => 'message',
-                'uid'  => $req['to'],
-                'to'   => $req['uid'],
-                'data' => $req['data']
-            ], JSON_UNESCAPED_UNICODE));
+            $this->send($this->u->get($req['to']), json_encode($req, JSON_UNESCAPED_UNICODE));
         }
         
         if ($this->debug) {

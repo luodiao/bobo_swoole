@@ -10,7 +10,7 @@ import Moment from 'moment'
 import store from './store/index'
 import Cookie from 'js-cookie'
 import API from './api'
-import WS from './websocket'
+import WS from './websocket/websocket'
 
 Vue.config.productionTip = false
 

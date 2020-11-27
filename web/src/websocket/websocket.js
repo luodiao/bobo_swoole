@@ -7,6 +7,8 @@
  * @param {Number}    uid     当前登录用户
  * @param {Number}    status  连接状态 0=未连接 1=连接成功
  */
+import Notice from './noticeProcess'
+
 const _args = {
   socket: Object,
   options: Object,
@@ -118,7 +120,16 @@ const install = function (Vue, options) {
       setInterval(() => {
         this.send(JSON.stringify({type: 'heartbeat', uid: uid, data: 'ping', timestamp: (new Date()).valueOf()}))
       }, options.heartbeat)
-    }
+    },
+
+    /**
+     * 消息监控处理（单独处理类）
+     */
+    monitor: function (uid) {
+      Notice.monitor(this, uid, _args)
+    },
+
+    notice: Notice
   }
 }
 
