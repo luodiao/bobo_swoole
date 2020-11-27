@@ -18,7 +18,7 @@ Vue.prototype.moment = Moment
 
 Vue.use(ViewUI)
 Vue.use(VueI18n)
-Vue.use(WS, {debug: true, connection: 'ws://127.0.0.1:9502', heartbeat: 59000})
+Vue.use(WS, {debug: true, connection: 'ws://0.0.0.0:9502', heartbeat: 59000})
 
 // 是否登录
 router.beforeEach((to, from, next) => {
