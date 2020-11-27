@@ -132,7 +132,7 @@
           </Input>
         </div>
         <div class="send-box">
-          <Button size="large" icon="ios-paper-plane" type="primary" shape="circle"></Button>
+          <Button size="large" icon="ios-paper-plane" type="primary" shape="circle" @click="sendMessage"></Button>
         </div>
       </div>
     </Row>
@@ -141,6 +141,7 @@
 
 <script>
 import Conf from '../config/conf.json'
+import { mapState } from 'vuex'
 
 export default {
   name: 'message-setting',
@@ -157,6 +158,12 @@ export default {
         visible: false
       }
     }
+  },
+
+  computed: {
+    ...mapState({
+      user: state => state.sign.user
+    })
   },
 
   watch: {
@@ -180,6 +187,19 @@ export default {
     selectSmileys (smileys) {
       this.smileys.visible = false
       this.message += smileys
+    },
+    sendMessage () {
+      if (this.message === '') {
+        return false
+      }
+
+      this.$ws.send(JSON.stringify({
+        type: 'message',
+        uid: this.user.id,
+        to: this.value.friend_id,
+        data: this.message
+      }))
+      this.message = ''
     }
   }
 }

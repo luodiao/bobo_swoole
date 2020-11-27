@@ -184,11 +184,30 @@ export default {
     ...mapActions(['friendsList']),
     swtichMenu (menu) {
       this.activeMenuData = menu
+    },
+    initSocket () {
+      var _this = this
+      this.$ws.connect({
+        onopen (evt) {
+          _this.$ws.send(JSON.stringify({type: 'register', uid: _this.user.id}))
+        },
+        onmessage (response) {
+          console.log('message' + response)
+        },
+        onclose (evt) {
+          console.log('close')
+        }
+      }, this.user.id)
     }
   },
 
   created () {
     this.friendsList()
+    this.initSocket()
+  },
+
+  destroyed () {
+    this.$ws.close()
   }
 }
 </script>
