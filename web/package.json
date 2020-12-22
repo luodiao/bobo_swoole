@@ -24,6 +24,7 @@
     "vue-puzzle-vcode": "^1.1.4",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
+    "vue-socket.io": "^3.0.10",
     "vuex": "3.4.0"
   },
   "devDependencies": {

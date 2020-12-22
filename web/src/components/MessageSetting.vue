@@ -29,17 +29,13 @@
         </List>
       </div>
 
-      <div class="content">
-        <div class="received-box">
+      <div class="content" id="data-list-content">
+        <!-- <div class="received-box">
           <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
           <div class="comments">
             123123123123123123123123123123123123123123123123
             <small class="text-time">12:00</small>
           </div>
-        </div>
-        <div class="received-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments"><div class="arrow"></div>123</div>
         </div>
 
         <div class="send-box">
@@ -48,58 +44,13 @@
             123123123123123123123123123123123123123123123123
             <small class="text-time">12:00</small>
           </div>
-        </div>
-        <div class="send-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments"><div class="arrow"></div>123</div>
-        </div>
-
-        <div class="received-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
+        </div> -->
+        <div :class="item.uid === user.id ? 'send-box' : 'received-box'" v-for="(item,inx) in chatrecords" :key="inx">
+          <Avatar size="large" icon="ios-person" :src="item.uid === user.id ? user.avatar : value.avatar" class="avatar" />
           <div class="comments">
-            123123123123123123123123123123123123123123123123
-            <small class="text-time">12:00</small>
+            {{item.data}}
+            <small class="text-time">{{moment(item.timestamp).format('LT')}}</small>
           </div>
-        </div>
-        <div class="received-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments"><div class="arrow"></div>123</div>
-        </div>
-
-        <div class="send-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments">
-            123123123123123123123123123123123123123123123123
-            <small class="text-time">12:00</small>
-          </div>
-        </div>
-        <div class="send-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments"><div class="arrow"></div>123</div>
-        </div>
-
-        <div class="received-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments">
-            123123123123123123123123123123123123123123123123
-            <small class="text-time">12:00</small>
-          </div>
-        </div>
-        <div class="received-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments"><div class="arrow"></div>123</div>
-        </div>
-
-        <div class="send-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments">
-            123123123123123123123123123123123123123123123123
-            <small class="text-time">12:00</small>
-          </div>
-        </div>
-        <div class="send-box">
-          <Avatar size="large" icon="ios-person" :src="value.avatar" class="avatar" />
-          <div class="comments"><div class="arrow"></div>123</div>
         </div>
       </div>
 
@@ -120,7 +71,7 @@
           </Input>
         </div>
         <div class="send-box">
-          <Button size="large" icon="ios-paper-plane" type="primary" shape="circle"></Button>
+          <Button size="large" icon="ios-paper-plane" type="primary" shape="circle" @click="sendMessage"></Button>
         </div>
       </div>
     </Row>
@@ -129,6 +80,8 @@
 
 <script>
 import Conf from '../config/conf.json'
+import { mapState } from 'vuex'
+import Cookie from 'js-cookie'
 
 export default {
   name: 'message-setting',
@@ -143,18 +96,69 @@ export default {
       smileys: {
         list: Conf.smileys,
         visible: false
-      }
+      },
+      chatrecords: []
     }
   },
 
+  computed: {
+    ...mapState({
+      user: state => state.sign.user
+    })
+  },
+
   methods: {
+    scrollToBottom () {
+      this.$nextTick(() => {
+        var div = document.getElementById('data-list-content')
+        div.scrollTop = div.scrollHeight
+      })
+    },
     goBack () {
       this.$emit('input', {})
     },
     selectSmileys (smileys) {
       this.smileys.visible = false
       this.message += smileys
+    },
+    sendMessage () {
+      if (this.message === '') {
+        return false
+      }
+
+      this.$ws.notice.send(this.value.friend_id, this.message)
+      this.chatrecords.push({
+        uid: this.user.id,
+        to: this.value.friend_id,
+        data: this.message,
+        timestamp: (new Date()).valueOf()
+      })
+      this.message = ''
+      this.scrollToBottom()
+    },
+    chatrecordsData () {
+      let history = Cookie.getJSON('messages-' + this.user.id)
+      if (!history || typeof history[this.value.friend_id] === 'undefined') {
+        this.chatrecords = []
+      } else {
+        this.chatrecords = history[this.value.friend_id]
+      }
+    },
+    listens () {
+      var _this = this
+      this.$ws.notice.call(resp => {
+        if (resp.uid === this.value.friend_id) {
+          _this.chatrecords.push(resp)
+          _this.scrollToBottom()
+        }
+      })
     }
+  },
+
+  mounted () {
+    this.scrollToBottom()
+    this.listens()
+    this.chatrecordsData()
   }
 }
 </script>

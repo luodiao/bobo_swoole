@@ -202,7 +202,7 @@ body {
  */
 .login-card {
   max-width: 23rem;
-  margin: 15% auto 0;
+  margin: 15% auto 0 !important;
   padding: 0 10px;
 
   .font-title {
@@ -469,6 +469,9 @@ body {
     }
   }
 
+  .content::-webkit-scrollbar {
+    width: 0;
+  }
   .content {
     height: calc(100vh - 73px - 73px);
     overflow: auto;
