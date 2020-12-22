@@ -1,12 +1,11 @@
 <?php
 namespace app\server\controller;
+use think\swoole\Server;
 
-use think\Swoole\Server;
-
-class Websocket extends Server{
+class Websocket extends Server {
     protected $host = '0.0.0.0';
     protected $port = 9502;
-    protected $sockType = "socket";
+    protected $serverType = "socket";
     protected $option = [
         'worker_num'	=> 4,//设置启动的Worker进程数
         'daemonize'	=> false,//守护进程化（上线改为true）
